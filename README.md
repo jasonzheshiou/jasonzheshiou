@@ -97,17 +97,9 @@ Beyond the day job, I'm passionate about **AI cooperation** — building tools w
 
 ---
 
-## 📈 GitHub Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=jasonzheshiou&show_icons=true&theme=transparent&hide_border=true&title_color=58A6FF&icon_color=58A6FF&text_color=8B949E&bg_color=transparent" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=jasonzheshiou&layout=compact&theme=transparent&hide_border=true&title_color=58A6FF&text_color=8B949E&bg_color=transparent" alt="Top Languages" />
-</p>
-
----
-
 ## 📫 Connect
 
+- **LinkedIn:** [linkedin.com/in/zheshi-jason-ou](https://www.linkedin.com/in/zheshi-jason-ou-8780203a)
 - **GitHub:** [@jasonzheshiou](https://github.com/jasonzheshiou)
 
 ---
