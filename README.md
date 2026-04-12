@@ -1,14 +1,14 @@
 # Hi, I'm Jason 👋
 
-**Data Scientist | Actuary (FIAA)**
+**Senior Data Scientist / Strategic Analytic Actuary (FIAA)**
 
-> 10+ years transforming complex data into actionable insights for the insurance and financial services sectors.
+> 12+ years transforming complex data into actionable insights for the insurance and financial services sectors.
 
 ---
 
 ## About Me
 
-I'm a **Fellow of the Institute of Actuaries of Australia (FIAA)** with deep experience in regulated environments. My expertise spans data integration, predictive modeling, business intelligence, and process automation.
+I'm a **Fellow of the Institute of Actuaries of Australia (FIAA)** with deep experience in regulated environments. My expertise spans machine learning in production, predictive underwriting, data integration, business intelligence, and process automation.
 
 I thrive at the intersection of **technical depth** and **executive communication** — turning complex datasets into clear, strategic insights that drive measurable business outcomes.
 
@@ -35,6 +35,16 @@ I thrive at the intersection of **technical depth** and **executive communicatio
 ---
 
 ## 💼 Experience
+
+### **Pacific Life Re** — Senior Data Scientist / Strategic Analytic Actuary (FIAA)
+*Jun 2025 – Present · Sydney, NSW*
+
+- **Predictive Underwriting ML** — Built and productionised a machine learning solution to increase STS outcomes while controlling portfolio risk across a multi-benefit suite with application-level decisioning.
+- **End-to-End Modelling Ownership** — Owned the full modelling lifecycle: data processing, time-based validation/OOT testing, feature selection/tuning, threshold optimisation, and sensitivity analysis aligned to business risk tolerances.
+- **Production Deployment** — Defined client implementation approach (packaging/container options, environment requirements, JSON I/O conventions) and partnered with engineering/architecture to enable secure deployment and retraining.
+- **Governance & Approvals** — Assisted in governance and approvals across underwriting, pricing, technology, risk, model risk, legal/privacy, and information security. Created monitoring plans and internal/external documentation variants.
+- **Adviser & Portfolio Analytics** — Developed adviser/portfolio analytics and a ranking methodology to support partner relationship management through **Streamlit**.
+- **Programme Management** — Managed competing priorities across simultaneous programmes, balancing delivery timelines and stakeholder needs through clear prioritisation and proactive communication.
 
 ### **Resolution Life Australasia** — Data Scientist / Actuary (FIAA)
 *Apr 2020 – Jun 2025 · Sydney, NSW*
