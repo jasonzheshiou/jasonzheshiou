@@ -12,6 +12,8 @@ I'm a **Fellow of the Institute of Actuaries of Australia (FIAA)** with deep exp
 
 I thrive at the intersection of **technical depth** and **executive communication** — turning complex datasets into clear, strategic insights that drive measurable business outcomes.
 
+Beyond the day job, I'm passionate about **AI cooperation** — building tools where humans and models work together, not in competition. I believe the best systems don't replace people; they amplify them. I'm actively exploring how AI can augment analytical workflows, improve data governance, and help teams make better decisions, faster.
+
 ---
 
 ## 🔧 Tech Stack
