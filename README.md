@@ -90,7 +90,7 @@ Beyond the day job, I'm passionate about **AI cooperation** - building tools whe
       <h3>📊 EA Dashboard</h3>
       <p>Interactive analytics dashboard for experience analysis and performance monitoring.</p>
       <p><i>Python · Data Visualization · Analytics</i></p>
-      <a href="https://github.com/jasonzheshiou/EA_Dashboard">View Project →</a>
+      <a href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Analysis_Dashboard">View Project →</a>
     </td>
   </tr>
 </table>
