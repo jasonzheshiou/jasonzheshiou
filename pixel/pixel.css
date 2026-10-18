@@ -1,0 +1,145 @@
+/* ==========================================================================
+   The pixel site's skin.
+   Loaded after /assets/site.css on every page under /pixel/. The layout,
+   components and content are shared with the line edition; this sheet changes
+   the material: flat surfaces, hard 3-pixel edges, offset shadows instead of
+   blur and glow, a 4-pixel substrate, a pixel typeface for headings and
+   controls, and the pixel sprite at whole-pixel sizes.
+   ========================================================================== */
+
+:root {
+  --px-disp: "Silkscreen", "Space Grotesk", var(--sans);
+  --px-edge: 3px;
+  --px-shadow: rgba(0, 0, 0, 0.55);
+  --px-shadow-soft: rgba(0, 0, 0, 0.35);
+
+  /* flat, opaque surfaces: nothing blurs here */
+  --panel: #0d1723;
+  --panel-2: #0b1420;
+  --line: #26405a;
+  --line-2: #3c6788;
+  --radius: 0;
+  --glow: none;
+}
+
+[data-theme="light"] {
+  --px-shadow: rgba(9, 32, 52, 0.2);
+  --px-shadow-soft: rgba(9, 32, 52, 0.12);
+  --panel: #ffffff;
+  --panel-2: #f1f6fb;
+  --line: #93abc0;
+  --line-2: #5b7f9d;
+}
+
+/* ---------- substrate: a coarse pixel grid, no light sweep ---------- */
+body::before {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(rgba(155, 140, 255, 0.045) 1px, transparent 1px);
+  background-size: 4px 4px, 4px 4px, 4px 4px;
+}
+body::after { display: none; }
+
+/* ---------- type: pixel for headings and chrome, Inter for reading ---------- */
+h1, h2, h3 { font-family: var(--px-disp); letter-spacing: 0; line-height: 1.34; text-shadow: none; }
+h1 { font-size: clamp(1.45rem, 3.5vw, 2.35rem); font-weight: 400; }
+h2 { font-size: clamp(1.08rem, 2.3vw, 1.45rem); font-weight: 400; }
+h3 { font-size: 0.98rem; font-weight: 400; }
+.hero h1 { max-width: 26ch; }
+.lede { font-size: clamp(1.02rem, 1.7vw, 1.16rem); }
+
+.eyebrow {
+  font-family: var(--px-disp); font-size: 10px; font-weight: 400; letter-spacing: .12em;
+}
+.eyebrow::before { width: 8px; height: 8px; box-shadow: none; }
+
+.brand > span { font-family: var(--px-disp); font-size: 14px; letter-spacing: 0; }
+.brand .mark { border-radius: 0; box-shadow: 2px 2px 0 var(--px-shadow); font-family: var(--px-disp); }
+nav.main a, nav.main .theme-btn { font-family: var(--px-disp); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; }
+.ed-link { color: var(--amber) !important; border: var(--px-edge) solid var(--line-2); padding: .34rem .55rem; }
+.ed-link:hover { border-color: var(--amber); background: var(--amber-bg); }
+
+.metric .v { font-family: var(--px-disp); font-weight: 400; font-size: clamp(1.25rem, 2.3vw, 1.7rem); letter-spacing: 0; text-shadow: none; }
+.metric.warn .v, .metric.bad .v, .metric.good .v { text-shadow: none; }
+.metric::after { opacity: 1; height: 4px; background: var(--cyan); }
+.metric.warn::after { background: var(--amber); }
+.metric.bad::after { background: var(--red); }
+.metric.good::after { background: var(--green); }
+
+.sec-num, .mean .n, .node-k { letter-spacing: .1em; }
+
+/* ---------- surfaces: hard edges and drop shadows, never blur ---------- */
+.panel, .card, .card.flat, .module, .metric, .tablewrap, .figscroll, .chartbox,
+.plain, .what, .two, .mean, .pillars, .ledger, .spec, .flow, .pairs, .arc,
+.tbl, .note, .toc, pre.code, .steps li {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--panel-2);
+  border-width: var(--px-edge) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--px-edge) var(--px-edge) 0 var(--px-shadow);
+}
+[data-theme="light"] .panel, [data-theme="light"] .card, [data-theme="light"] .card.flat,
+[data-theme="light"] .module, [data-theme="light"] .metric, [data-theme="light"] .plain,
+[data-theme="light"] .tablewrap, [data-theme="light"] .chartbox, [data-theme="light"] .tbl,
+[data-theme="light"] .figscroll, [data-theme="light"] pre.code {
+  box-shadow: var(--px-edge) var(--px-edge) 0 var(--px-shadow-soft);
+}
+.panel:hover, .card:hover, .module:hover { box-shadow: calc(var(--px-edge) + 2px) calc(var(--px-edge) + 2px) 0 var(--px-shadow); }
+.card, .module, .panel { transition: box-shadow .1s steps(2), transform .1s steps(2); }
+
+/* the top bar and footer get the same weight */
+.top { border-bottom-width: var(--px-edge); backdrop-filter: none; background: var(--bg-2); }
+footer.site { border-top-width: var(--px-edge); background: var(--bg-2); }
+
+/* ---------- controls ---------- */
+.btn {
+  font-family: var(--px-disp); font-size: 11px; font-weight: 400; letter-spacing: .06em;
+  border-width: var(--px-edge); border-radius: 0; box-shadow: 3px 3px 0 var(--px-shadow);
+}
+.btn:hover { box-shadow: 3px 3px 0 var(--px-shadow); filter: none; transform: translate(-1px, -1px); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--px-shadow); }
+.btn.ghost { border-width: var(--px-edge); }
+.theme-btn { border-width: var(--px-edge); border-radius: 0; box-shadow: 2px 2px 0 var(--px-shadow); }
+.theme-btn:hover { box-shadow: 2px 2px 0 var(--px-shadow); }
+.chip, .impact, .status, .badge, .filter, [data-filter] { border-width: 2px; border-radius: 0; }
+.prose a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+/* ---------- icons and images: whole pixels only ---------- */
+.ic { width: 32px; height: 32px; shape-rendering: crispEdges; }
+.ic.sm { width: 24px; height: 24px; }
+.ic.lg { width: 64px; height: 64px; }
+.module > header > svg.ic { width: 32px; height: 32px; }
+img { image-rendering: pixelated; }
+.sheet { image-rendering: pixelated; }
+
+/* ---------- diagrams and charts: square corners everywhere ---------- */
+.diagram .node, .diagram .link, .diagram .flow, .diagram .glyph, .diagram text { shape-rendering: crispEdges; }
+.diagram .node { stroke-width: 2; }
+.chartbox svg { shape-rendering: crispEdges; }
+.diagram .node[rx], .diagram rect { rx: 0; }
+
+/* ---------- tables ---------- */
+table.tbl { font-size: 13.6px; }
+table.tbl th, table.tbl td { border-bottom-width: 2px; }
+table.tbl thead th { letter-spacing: .08em; }
+
+/* ---------- motion: stepped, not eased ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .status::before { animation: none; box-shadow: none; }
+  .diagram .flow { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- small screens: keep the chunkiness from eating the text ---------- */
+@media (max-width: 900px) {
+  :root { --px-edge: 2px; }
+  .hero h1 { font-size: clamp(1.35rem, 6.2vw, 1.8rem); }
+  .panel, .card, .module, .metric, .plain, .tablewrap, .chartbox, .tbl, .figscroll, pre.code {
+    box-shadow: 2px 2px 0 var(--px-shadow);
+  }
+}

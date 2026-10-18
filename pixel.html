@@ -46,6 +46,7 @@ document.documentElement.dataset.pixel="1";</script>
     <a href="/projects.html">Projects</a>
     <a href="/method.html">Method</a>
     <a href="/about.html">About</a>
+    <a class="ed-link" href="/pixel/" title="The same site drawn entirely in pixel art">Pixel site &#9654;</a>
     <button class="theme-btn" type="button">☾</button>
   </nav>
 </div></header>
@@ -222,15 +223,15 @@ document.documentElement.dataset.pixel="1";</script>
 
 
 <div class="wrap hero">
-  <p class="eyebrow">Pixel edition · second version of this site</p>
+  <p class="eyebrow">Pixel edition · a second site, same content</p>
   <h1>The same argument, drawn in whole pixels.</h1>
   <p class="lede">Every icon on this site also exists as 32 × 32 pixel art, generated from the same source shapes
   with the drawing primitives from <a href="https://github.com/jasonzheshiou/Pixel_Storybook">Pixel_Storybook</a>
-  — Bresenham lines and midpoint circles, not a blur-down. <a href="/?pixel=1">Switch the whole site over</a>, or
-  stay here and look at the parts.</p>
+  — Bresenham lines and midpoint circles, not a blur-down. There are two sites built from that one sheet: this page
+  exists in both, and either edition's top bar links to the other.</p>
   <div class="btn-row">
-    <a class="btn" href="/?pixel=1">Pixel version of the home page</a>
-    <a class="btn ghost" href="/">Back to the line edition</a>
+    <a class="btn" href="#set">Every glyph, both editions</a>
+    <a class="btn ghost" href="#how">How the conversion worked</a>
     <a class="btn ghost" href="/method.html">The method behind the work</a>
   </div>
 </div>
@@ -317,11 +318,12 @@ document.documentElement.dataset.pixel="1";</script>
   <p class="small muted">All 22 glyphs at 5× scale, 3.6 KB. Per-glyph provenance — shapes read, pixels lit, colours
   used — is written to a manifest next to the generator.</p>
 
-  <div class="note"><h4>Reading it on the rest of the site</h4>
-    <p>Pixel mode is a site-wide switch, not a separate build: the nav's <b>◼ pixel</b> button (or
-    <code>?pixel=1</code> on any URL) retargets every icon reference and turns on the pixel stylesheet — hard
-    borders, drop-shadow instead of blur, a 4-pixel substrate grid. Your choice is remembered, and every page keeps
-    working with the toggle off or JavaScript disabled.</p></div>
+  <div class="note"><h4>Two sites, one source of truth</h4>
+    <p>The two editions are two sites, not a theme switch: every page exists twice, one drawn with vector strokes and
+    one with whole pixels, each with its own typeface and surface treatment. The pixel site is not hand-maintained. A
+    script copies each page across, retargets every icon reference from the vector sheet to the pixel sheet, moves
+    the links and adds the extra skin — so a sentence corrected once is correct in both editions. Both sites share
+    one stylesheet for layout, and each one's top bar links to the other.</p></div>
 </div>
 
 </main>
@@ -346,18 +348,49 @@ document.documentElement.dataset.pixel="1";</script>
 </div></footer>
 
 <script>
-/* The gallery lists the same set in both sprites so the conversion can be judged. */
+/* This page compares the two sheets, so it needs the pixel one. It is not inlined
+   on the vector site — the sheet is fetched here and only here, and the page
+   still reads properly if that fetch fails. */
 (function(){
-  var names = ["seed","target","agents","trend","standard","gauge","schema","sheet","loop","particles","pixel",
+  var names = ["seed","target","agents","trend","standard","gauge","sheet","loop","particles","pixel",
                "puzzle","id","ruler","shield","sign","clock","blackbox","handoff","architect","queue","delta"];
   var host = document.getElementById("gallery");
   if (!host) return;
-  names.forEach(function(n){
-    var d = document.createElement("div");
-    d.innerHTML = '<div class="both"><svg class="ic px lg" aria-hidden="true"><use href="#p-' + n + '"/></svg>' +
-                  '<svg class="ic line" aria-hidden="true"><use href="#i-' + n + '"/></svg></div>' +
-                  '<b>' + n + '</b>';
-    host.appendChild(d);
+
+  function build(withPixel) {
+    names.forEach(function(n){
+      var d = document.createElement("div");
+      d.innerHTML = '<div class="both">' +
+        (withPixel ? '<svg class="ic px lg" aria-hidden="true"><use href="#p-' + n + '"/></svg>' : '') +
+        '<svg class="ic line" aria-hidden="true"><use href="#i-' + n + '"/></svg></div>' +
+        '<b>' + n + '</b>';
+      host.appendChild(d);
+    });
+  }
+
+  function ensureSheet(done) {
+    if (document.getElementById("p-seed")) { done(true); return; }
+    fetch("/assets/pixel-sprite.html")
+      .then(function (r) { return r.ok ? r.text() : Promise.reject(new Error("no sheet")); })
+      .then(function (txt) {
+        var svg = new DOMParser().parseFromString(txt, "text/html").querySelector("svg");
+        if (!svg || !svg.querySelector("symbol")) { done(false); return; }
+        var node = document.importNode(svg, true);
+        node.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
+        document.getElementById("main").appendChild(node);
+        done(true);
+      })
+      .catch(function () { done(false); });
+  }
+
+  ensureSheet(function (ok) {
+    build(ok);
+    if (!ok) {
+      var note = document.createElement("p");
+      note.className = "small muted";
+      note.textContent = "The pixel sheet did not load in this browser session, so only the vector column is drawn above; the contact sheet further down shows the same glyphs as an image.";
+      host.parentNode.insertBefore(note, host.nextSibling);
+    }
   });
 })();
 </script>

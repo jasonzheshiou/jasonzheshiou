@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||"dark";if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>The Actuarial AI Ecosystem — how the repositories interlock · Jason Ou · pixel edition</title>
+<meta name="description" content="Six layers, thirteen repositories, one thesis: open, inspectable tools for actuarial work. Named dependencies between the data generator, the A/E benchmark, the analysis dashboard, the underwriting engine and the compliance tool.">
+<meta property="og:title" content="The Actuarial AI Ecosystem — how the repositories interlock">
+<meta property="og:description" content="Not a project list: a map of what feeds what, with the edges named in code.">
+<meta property="og:url" content="https://jasonzheshiou.github.io/pixel/ecosystem.html">
+<meta property="og:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<meta name="twitter:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<link rel="canonical" href="https://jasonzheshiou.github.io/pixel/ecosystem.html">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/pixel/pixel.css">
+<script src="/assets/site.js" defer></script>
+<style>
+.node{position:relative}
+.node .lv{position:absolute;top:.5rem;right:.6rem;font:500 10px/1 var(--mono);color:var(--muted);opacity:.6}
+.legend-row{display:flex;flex-wrap:wrap;gap:1rem;font-size:12.5px;color:var(--muted);margin-top:1rem}
+.substrate{border:1px dashed var(--line-2);border-radius:var(--radius);padding:.9rem 1.1rem;margin-top:.8rem;font-size:13.5px;color:var(--muted);background:var(--panel-2)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="/pixel/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
+  <nav class="main">
+    <a href="/pixel/">Home</a>
+    <a href="/pixel/research/life-insurance-experience-bench.html">A/E Bench</a>
+    <a href="/pixel/research/underwriting-output-variance.html">Variance</a>
+    <a href="/pixel/research/findings.html">Findings</a>
+    <a href="/pixel/ecosystem.html" aria-current="page">Ecosystem</a>
+    <a href="/pixel/projects.html">Projects</a>    <a href="/pixel/method.html">Method</a>
+
+    <a href="/pixel/about.html">About</a>
+    <a class="ed-link" href="/" title="The same site drawn with vector line art">&#9664; Line site</a>
+    <button class="theme-btn" type="button">☾</button>
+  </nav>
+</div></header>
+
+<main id="main">
+<svg xmlns="http://www.w3.org/2000/svg" class="sprite sprite-pixel" aria-hidden="true" focusable="false"><defs>
+  <symbol id="p-seed" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M18 18h10v1h-10zM18 26h10v1h-10zM18 22h3v1h-3zM22 22h3v1h-3zM26 22h2v1h-2z"/></g><g fill="var(--ic-cyan)"><path d="M5 5h10v1h-10zM5 14h10v1h-10zM5 6h1v8h-1zM14 6h1v8h-1zM9 15h3v1h-3zM9 16h1v2h-1zM12 16h1v1h-1zM13 17h2v1h-2zM9 18h7v1h-7z"/></g><g fill="var(--ic-amber)"><path d="M22 20h3v1h-3zM22 24h3v1h-3zM21 21h1v3h-1zM25 21h1v3h-1z"/></g></symbol>
+  <symbol id="p-target" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M5 5h23v1h-23zM5 27h23v1h-23zM5 6h1v10h-1zM5 17h1v10h-1zM16 6h1v4h-1zM16 23h1v4h-1zM27 6h1v10h-1zM27 17h1v10h-1zM5 16h5v1h-5zM23 16h5v1h-5z"/></g><g fill="var(--ic-cyan)"><path d="M14 10h5v1h-5zM14 15h5v3h-5zM14 22h5v1h-5zM13 11h1v1h-1zM13 21h1v1h-1zM19 11h1v1h-1zM19 21h1v1h-1zM12 12h1v1h-1zM12 20h1v1h-1zM20 12h1v1h-1zM20 20h1v1h-1zM11 13h1v1h-1zM11 19h1v1h-1zM21 13h1v1h-1zM21 19h1v1h-1zM10 14h1v5h-1zM15 14h3v1h-3zM15 18h3v1h-3zM22 14h1v5h-1z"/></g><g fill="var(--ic-amber)"><path d="M22 22h1v1h-1zM22 26h1v1h-1zM26 22h1v1h-1zM26 26h1v1h-1zM23 23h1v1h-1zM23 25h1v1h-1zM25 23h1v1h-1zM25 25h1v1h-1zM24 24h1v1h-1z"/></g></symbol>
+  <symbol id="p-agents" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M2 5h6v3h-6zM2 12h6v3h-6zM2 19h6v3h-6z"/></g><g fill="var(--ic-cyan)"><path d="M14 5h6v2h-6zM14 12h6v2h-6zM14 19h6v2h-6zM15 7h4v1h-4zM15 14h4v1h-4zM15 21h4v1h-4zM6 8h2v2h-2zM6 15h2v2h-2zM6 22h2v2h-2zM16 8h2v2h-2zM16 15h2v2h-2zM16 22h2v2h-2zM6 10h12v1h-12zM6 17h12v1h-12zM6 24h12v1h-12zM25 19h2v1h-2zM25 25h2v1h-2zM24 20h4v1h-4zM23 21h2v1h-2zM27 21h2v1h-2zM22 22h2v1h-2zM22 24h2v1h-2zM28 22h2v1h-2zM28 24h2v1h-2zM21 23h2v1h-2zM21 25h2v1h-2zM29 23h2v1h-2zM24 26h2v1h-2z"/></g></symbol>
+  <symbol id="p-trend" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M0 17h1v7h-1zM0 24h27v1h-27z"/></g><g fill="var(--ic-cyan)"><path d="M5 11h2v1h-2zM4 12h4v1h-4zM3 13h2v1h-2zM3 21h2v1h-2zM7 13h2v1h-2zM2 14h2v1h-2zM2 22h2v1h-2zM8 14h2v1h-2zM8 21h2v1h-2zM14 14h2v1h-2zM14 21h2v1h-2zM1 15h2v1h-2zM1 23h2v1h-2zM9 15h2v1h-2zM13 15h2v1h-2zM0 16h2v1h-2zM10 16h4v1h-4zM11 17h3v1h-3zM11 18h1v4h-1zM5 19h3v1h-3zM16 19h3v1h-3zM4 20h5v1h-5zM15 20h6v1h-6zM21 21h2v1h-2zM9 22h5v1h-5zM22 22h2v1h-2z"/></g><g fill="var(--ic-amber)"><path d="M19 8h5v1h-5zM19 12h5v1h-5zM18 9h2v1h-2zM23 9h2v1h-2zM18 10h1v1h-1zM24 10h1v2h-1zM24 14h1v2h-1zM17 11h2v1h-2zM16 12h1v1h-1zM15 13h2v1h-2zM20 13h1v3h-1zM23 13h1v1h-1zM20 16h5v1h-5z"/></g></symbol>
+  <symbol id="p-standard" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M5 7h15v1h-15zM5 8h1v3h-1zM5 12h1v12h-1zM20 8h2v1h-2zM21 9h2v1h-2zM23 10h1v1h-1zM5 11h19v1h-19zM5 24h19v1h-19zM24 12h1v4h-1zM22 23h1v1h-1z"/></g><g fill="var(--ic-cyan)"><path d="M8 17h3v1h-3zM9 18h2v1h-2zM10 19h2v1h-2zM11 20h2v1h-2zM12 21h2v1h-2zM13 22h2v1h-2z"/></g><g fill="var(--ic-amber)"><path d="M8 13h2v1h-2zM9 14h2v1h-2zM10 15h2v1h-2zM11 16h2v3h-2zM21 16h3v1h-3zM20 17h4v1h-4zM18 18h4v1h-4zM12 19h2v1h-2zM16 19h4v1h-4zM13 20h5v1h-5zM14 21h2v1h-2z"/></g></symbol>
+  <symbol id="p-gauge" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M6 26h21v1h-21z"/></g><g fill="var(--ic-cyan)"><path d="M13 12h7v1h-7zM11 13h3v1h-3zM19 13h3v1h-3zM10 14h2v1h-2zM21 14h2v1h-2zM8 15h2v1h-2zM23 15h2v1h-2zM8 16h1v1h-1zM21 16h1v1h-1zM24 16h1v1h-1zM7 17h1v2h-1zM20 17h1v1h-1zM25 17h1v2h-1zM19 18h1v1h-1zM6 19h2v1h-2zM18 19h2v1h-2zM25 19h2v1h-2zM6 20h1v2h-1zM15 20h4v1h-4zM26 20h1v2h-1zM14 21h1v1h-1zM14 23h1v1h-1zM17 21h2v1h-2zM6 22h21v1h-21zM18 23h1v1h-1zM15 24h3v1h-3z"/></g><g fill="var(--ic-amber)"><path d="M27 8h1v1h-1zM27 10h1v1h-1zM27 12h1v1h-1zM27 9h2v1h-2zM27 11h2v1h-2zM29 10h1v1h-1z"/></g></symbol>
+  <symbol id="p-schema" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M4 6h11v1h-11zM18 6h11v1h-11zM4 7h1v6h-1zM14 7h1v6h-1zM18 7h1v6h-1zM28 7h1v6h-1zM4 13h5v1h-5zM24 13h5v1h-5zM11 19h5v1h-5zM17 19h5v1h-5zM11 20h1v7h-1zM21 20h1v7h-1zM11 27h11v1h-11z"/></g><g fill="var(--ic-cyan)"><path d="M9 13h15v1h-15zM9 16h15v1h-15zM9 14h1v2h-1zM23 14h1v2h-1zM16 17h1v3h-1z"/></g></symbol>
+  <symbol id="p-sheet" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M5 5h23v1h-23zM5 11h23v1h-23zM5 23h23v1h-23zM5 27h23v1h-23zM5 6h1v5h-1zM5 12h1v5h-1zM5 18h1v5h-1zM5 24h1v3h-1zM27 6h1v5h-1zM27 12h1v5h-1zM27 18h1v5h-1zM27 24h1v3h-1zM13 12h1v5h-1zM13 18h1v5h-1zM13 24h1v3h-1zM20 12h1v3h-1zM20 16h1v1h-1zM20 18h1v5h-1zM20 24h1v3h-1zM5 17h8v1h-8zM15 17h3v1h-3zM19 17h9v1h-9z"/></g><g fill="var(--ic-amber)"><path d="M19 15h2v1h-2zM15 16h5v1h-5zM13 17h2v1h-2zM18 17h1v2h-1zM14 18h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM16 20h1v1h-1z"/></g></symbol>
+  <symbol id="p-loop" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M12 13h9v1h-9zM12 19h9v1h-9zM12 14h1v5h-1zM20 14h1v5h-1z"/></g><g fill="var(--ic-cyan)"><path d="M16 6h4v1h-4zM16 7h1v1h-1zM19 7h3v1h-3zM19 25h3v1h-3zM15 8h1v2h-1zM22 8h2v1h-2zM22 24h2v1h-2zM23 9h1v1h-1zM23 23h1v1h-1zM14 10h1v3h-1zM24 10h1v1h-1zM24 22h1v1h-1zM24 11h2v1h-2zM24 21h2v1h-2zM25 12h1v1h-1zM25 20h1v1h-1zM26 13h1v6h-1zM13 14h1v1h-1zM13 22h1v1h-1zM11 17h1v2h-1zM9 18h1v1h-1zM9 22h1v1h-1zM9 19h3v2h-3zM25 19h2v1h-2zM9 21h2v1h-2zM12 21h1v1h-1zM9 23h6v1h-6zM10 24h2v1h-2zM11 25h3v1h-3zM13 26h7v1h-7z"/></g><g fill="var(--ic-amber)"><path d="M14 16h5v1h-5z"/></g></symbol>
+  <symbol id="p-particles" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M2 8h24v1h-24zM2 23h24v1h-24zM2 9h1v14h-1zM27 9h1v14h-1z"/></g><g fill="var(--ic-cyan)"><path d="M7 10h2v1h-2zM7 12h2v1h-2zM6 11h4v1h-4zM17 12h4v1h-4zM17 15h4v1h-4zM12 13h2v1h-2zM12 15h2v1h-2zM16 13h6v2h-6zM11 14h4v1h-4zM13 16h2v1h-2zM13 21h2v1h-2zM12 17h4v1h-4zM12 20h4v1h-4zM11 18h6v2h-6z"/></g><g fill="var(--ic-amber)"><path d="M19 10h2v2h-2zM7 16h2v1h-2zM7 18h2v1h-2zM6 17h4v1h-4zM25 21h1v1h-1z"/></g><g fill="var(--ic-violet)"><path d="M23 17h2v1h-2zM23 19h2v1h-2zM22 18h4v1h-4zM24 20h1v1h-1z"/></g></symbol>
+  <symbol id="p-pixel" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M5 5h23v1h-23zM5 16h23v1h-23zM5 27h23v1h-23zM5 6h1v10h-1zM5 17h1v10h-1zM16 6h1v10h-1zM16 17h1v10h-1zM27 6h1v10h-1zM27 17h1v10h-1z"/></g><g fill="var(--ic-cyan)"><path d="M10 10h5v5h-5zM18 18h5v5h-5z"/></g><g fill="var(--ic-amber)"><path d="M18 10h5v5h-5z"/></g></symbol>
+  <symbol id="p-puzzle" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M5 5h11v1h-11zM5 15h11v1h-11zM5 17h11v1h-11zM5 27h11v1h-11zM17 5h11v1h-11zM17 15h11v1h-11zM5 6h1v9h-1zM5 18h1v9h-1zM15 6h1v9h-1zM15 18h1v9h-1zM17 6h1v9h-1zM27 6h1v9h-1zM10 10h1v1h-1zM22 22h1v1h-1z"/></g><g fill="var(--ic-amber)"><path d="M17 17h11v1h-11zM17 27h11v1h-11zM17 18h1v9h-1zM27 18h1v9h-1z"/></g></symbol>
+  <symbol id="p-id" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M4 9h24v1h-24zM4 23h24v1h-24zM4 10h1v13h-1zM27 10h1v11h-1zM27 22h1v1h-1z"/></g><g fill="var(--ic-cyan)"><path d="M7 11h4v1h-4zM7 15h4v1h-4zM7 17h4v1h-4zM6 12h5v3h-5zM8 16h2v1h-2zM6 18h6v1h-6zM6 19h7v1h-7zM6 20h9v1h-9zM6 21h11v1h-11z"/></g><g fill="var(--ic-amber)"><path d="M15 11h7v4h-7zM18 16h7v5h-7z"/></g></symbol>
+  <symbol id="p-ruler" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M4 12h25v1h-25zM4 20h25v1h-25zM4 13h1v7h-1zM9 13h1v4h-1zM13 13h1v3h-1zM18 13h1v4h-1zM23 13h1v3h-1zM28 13h1v7h-1z"/></g><g fill="var(--ic-cyan)"><path d="M4 8h25v1h-25zM16 9h1v3h-1z"/></g></symbol>
+  <symbol id="p-shield" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-cyan)"><path d="M6 8h13v1h-13zM5 9h2v1h-2zM16 9h2v1h-2zM4 10h2v1h-2zM17 10h2v1h-2zM4 11h1v8h-1zM18 11h1v9h-1zM7 17h2v1h-2zM6 18h2v1h-2zM5 19h1v3h-1zM6 22h1v2h-1zM7 24h1v1h-1zM8 25h1v1h-1zM9 26h1v1h-1zM10 27h1v1h-1z"/></g><g fill="var(--ic-amber)"><path d="M8 14h2v1h-2zM9 15h2v1h-2zM10 16h2v1h-2zM10 26h2v1h-2zM11 17h2v1h-2zM11 25h2v1h-2zM12 18h2v1h-2zM12 24h2v1h-2zM13 19h2v1h-2zM13 23h2v1h-2zM14 20h4v1h-4zM15 21h3v1h-3zM14 22h2v1h-2z"/></g></symbol>
+  <symbol id="p-sign" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M4 23h24v1h-24z"/></g><g fill="var(--ic-cyan)"><path d="M7 15h3v1h-3zM6 16h2v1h-2zM5 17h2v1h-2zM4 18h2v1h-2zM3 19h2v1h-2zM2 20h2v1h-2zM1 21h2v1h-2z"/></g><g fill="var(--ic-amber)"><path d="M14 11h3v1h-3zM13 12h2v1h-2zM13 18h2v1h-2zM16 12h2v1h-2zM12 13h2v1h-2zM12 17h2v1h-2zM17 13h2v1h-2zM11 14h2v3h-2zM18 14h2v1h-2zM19 15h2v1h-2zM20 16h2v1h-2zM21 17h2v1h-2zM22 18h2v1h-2zM14 19h2v1h-2zM23 19h1v1h-1zM15 20h8v1h-8z"/></g></symbol>
+  <symbol id="p-clock" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-cyan)"><path d="M14 8h5v1h-5zM11 9h3v1h-3zM19 9h3v1h-3zM10 10h2v1h-2zM10 23h2v2h-2zM21 10h2v1h-2zM21 23h2v1h-2zM9 11h2v1h-2zM9 22h2v1h-2zM22 11h2v1h-2zM22 22h2v1h-2zM8 12h2v2h-2zM8 20h2v2h-2zM23 12h2v1h-2zM23 14h2v7h-2zM20 13h8v1h-8zM20 21h8v1h-8zM7 14h2v6h-2zM20 24h3v1h-3zM13 25h2v1h-2zM18 25h2v1h-2zM14 26h4v1h-4z"/></g><g fill="var(--ic-violet)"><path d="M16 6h4v1h-4zM13 7h2v1h-2zM19 7h2v1h-2z"/></g></symbol>
+  <symbol id="p-blackbox" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-cyan)"><path d="M9 10h14v1h-14zM9 18h14v1h-14zM4 11h4v1h-4zM4 15h4v1h-4zM9 11h1v2h-1zM9 14h1v4h-1zM20 11h1v2h-1zM20 14h1v4h-1zM1 12h2v1h-2zM1 14h2v1h-2zM7 12h1v1h-1zM7 14h1v1h-1zM8 13h1v1h-1zM21 13h1v1h-1z"/></g><g fill="var(--ic-amber)"><path d="M2 21h2v1h-2zM5 21h2v1h-2zM8 21h2v1h-2zM11 21h2v1h-2zM14 21h2v1h-2zM17 21h2v1h-2zM20 21h2v1h-2zM23 21h2v1h-2z"/></g><g fill="var(--ic-violet)"><path d="M2 7h2v1h-2zM5 7h2v1h-2zM8 7h2v1h-2zM11 7h2v1h-2zM14 7h2v1h-2zM17 7h2v1h-2zM20 7h2v1h-2zM23 7h2v1h-2z"/></g></symbol>
+  <symbol id="p-handoff" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M8 5h10v1h-10zM8 6h1v21h-1zM17 6h2v1h-2zM17 7h1v2h-1zM19 7h1v1h-1zM20 8h1v1h-1zM17 9h5v1h-5zM21 10h1v6h-1zM21 17h1v10h-1zM11 15h8v1h-8zM11 19h5v1h-5zM8 27h14v1h-14z"/></g><g fill="var(--ic-amber)"><path d="M25 13h1v1h-1zM25 15h1v1h-1zM25 17h1v1h-1zM25 19h1v1h-1zM25 14h2v1h-2zM25 18h2v1h-2zM27 15h1v1h-1zM27 17h1v1h-1zM21 16h8v1h-8zM28 21h1v5h-1z"/></g></symbol>
+  <symbol id="p-architect" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M5 16h23v1h-23zM5 21h23v1h-23zM7 17h2v1h-2zM24 17h2v1h-2zM9 18h2v1h-2zM22 18h2v1h-2zM11 19h2v1h-2zM20 19h2v1h-2zM13 20h2v1h-2zM18 20h2v1h-2zM6 22h2v1h-2zM25 22h2v1h-2zM8 23h2v1h-2zM23 23h2v1h-2zM10 24h2v1h-2zM21 24h2v1h-2zM12 25h2v1h-2zM19 25h2v1h-2zM14 26h2v1h-2zM17 26h2v1h-2zM16 27h1v1h-1z"/></g><g fill="var(--ic-cyan)"><path d="M15 4h3v1h-3zM13 5h2v1h-2zM18 5h2v1h-2zM11 6h2v1h-2zM20 6h2v1h-2zM9 7h2v1h-2zM22 7h2v1h-2zM7 8h2v1h-2zM24 8h2v1h-2zM5 9h2v1h-2zM26 9h2v1h-2zM6 10h2v1h-2zM25 10h2v1h-2zM8 11h2v1h-2zM23 11h2v1h-2zM10 12h2v1h-2zM21 12h2v1h-2zM12 13h2v1h-2zM19 13h2v1h-2zM14 14h2v1h-2zM17 14h2v1h-2zM16 15h1v1h-1z"/></g></symbol>
+  <symbol id="p-queue" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M5 7h6v1h-6zM5 25h6v1h-6zM21 7h6v1h-6zM21 25h6v1h-6zM5 8h1v17h-1zM10 8h1v8h-1zM10 17h1v8h-1zM21 8h1v8h-1zM21 17h1v8h-1zM26 8h1v17h-1z"/></g><g fill="var(--ic-cyan)"><path d="M13 7h6v1h-6zM13 25h6v1h-6zM13 8h1v8h-1zM13 17h1v8h-1zM18 8h1v8h-1zM18 17h1v8h-1z"/></g><g fill="var(--ic-amber)"><path d="M10 16h4v1h-4zM18 16h4v1h-4z"/></g></symbol>
+  <symbol id="p-delta" viewBox="0 0 32 32" shape-rendering="crispEdges"><g fill="var(--ic-dim)"><path d="M5 27h4v1h-4zM10 27h5v1h-5zM16 27h4v1h-4zM21 27h4v1h-4zM26 27h2v1h-2z"/></g><g fill="var(--ic-cyan)"><path d="M15 9h1v19h-1zM25 12h1v16h-1zM9 15h1v13h-1zM20 17h1v11h-1z"/></g><g fill="var(--ic-amber)"><path d="M8 8h18v1h-18z"/></g></symbol>
+</defs></svg>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="wrap hero">
+  <p class="eyebrow">Ecosystem · 13 repositories</p>
+  <h1>Not a project list — a working system</h1>
+  <p class="lede">Actuarial science has a long tradition of professional collaboration — experience studies,
+  mortality tables, industry working groups. Our <em>tools</em> have stayed proprietary. In an era where AI is
+  reshaping the profession, actuaries need inspectable tools more than ever, so every piece here is open,
+  versioned and cross-referenced. Open source is not a licensing choice; it is a governance choice.</p>
+  <div class="hero-meta">
+    <span class="chip">one shared substrate: local <span class="num">Qwen</span> 27B–38B on LAN</span>
+    <span class="chip">every edge named in code, not in a slide</span>
+  </div>
+</div>
+
+<div class="wrap band">
+  <div class="eco">
+
+    <div class="eco-layer">
+      <div class="lab"><svg class="ic" aria-hidden="true"><use href="#p-particles"/></svg><div class="lv">L6</div><h3>Craft &amp; method</h3><p>Where the habits come from: pre-registration, noise floors, per-pass audit trails.</p></div>
+      <div class="eco-nodes">
+        <a class="node" href="https://github.com/jasonzheshiou/Piticle_Life"><span class="lv">L6</span><b>Piticle_Life</b><span>48 runs against questions written before the runs; 2 of 3 claims died at their own noise floor.</span></a>
+        <a class="node" href="https://github.com/jasonzheshiou/Pixel_Storybook"><span class="lv">L6</span><b>Pixel_Storybook</b><span>A vision model that writes pixel code, critiques its own render, keeps every pass and manifest.</span></a>
+        <a class="node" href="https://github.com/jasonzheshiou/little_games"><span class="lv">L6</span><b>little_games</b><span>Generators that refuse to paint a board they cannot defend — uniqueness by construction.</span></a>
+      </div>
+    </div>
+
+    <div class="eco-layer">
+      <div class="lab"><svg class="ic" aria-hidden="true"><use href="#p-queue"/></svg><div class="lv">L5</div><h3>Operations</h3><p>The model is a server with a queue. Watch it, schedule against it, keep the loop honest.</p></div>
+      <div class="eco-nodes">
+        <a class="node" href="https://github.com/jasonzheshiou/LLM_Status_Watch"><span class="lv">L5</span><b>LLM_Status_Watch</b><span>Prometheus metrics → ntfy push when the box goes idle. Stdlib only, no agent on the GPU host.</span></a>
+        <a class="node" href="https://github.com/jasonzheshiou/M365-Copilot-Agent-Loop"><span class="lv">L5</span><b>M365-Copilot-Agent-Loop</b><span>Concept blueprint: close an agentic loop through OneDrive sync with local execution logs.</span></a>
+      </div>
+    </div>
+
+    <div class="eco-layer">
+      <div class="lab"><svg class="ic" aria-hidden="true"><use href="#p-agents"/></svg><div class="lv">L4</div><h3>Governance &amp; decisions</h3><p>Where AI output has to survive an auditor: debate, escalation, deterministic rules, JSONL audit trail.</p></div>
+      <div class="eco-nodes">
+        <a class="node" href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter"><span class="lv">L4</span><b>Multi-Agents_Underwriter</b><span>Medical / Financial / Compliance agents in structured debate over a deterministic rule engine. Rules as versioned JSON.</span></a>
+        <a class="node" href="https://github.com/jasonzheshiou/Standard_Inquirer"><span class="lv">L4</span><b>Standard_Inquirer</b><span>Conversational APRA compliance assessment over a ChromaDB knowledge base of 40+ standards, with severity-ranked gap reports.</span></a>
+      </div>
+    </div>
+
+    <div class="eco-layer">
+      <div class="lab"><svg class="ic" aria-hidden="true"><use href="#p-trend"/></svg><div class="lv">L3</div><h3>Judgement &amp; analysis</h3><p>The actuarial work itself — reading experience, setting assumptions, producing an audit-ready answer.</p></div>
+      <div class="eco-nodes">
+        <a class="node" href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Analysis_Dashboard"><span class="lv">L3</span><b>Experience Analysis Dashboard</b><span>TPD incidence study: credibility, A/E, Mann-Kendall, GLM, RF/GBM, MOB, with pipeline audit and session persistence.</span></a>
+        <a class="node" href="https://github.com/jasonzheshiou/Data_Schema_analyser"><span class="lv">L3</span><b>Data_Schema_analyser</b><span>Schema inspection, join strategies, ERDs and executable pandas from a natural-language brief.</span></a>
+        <a class="node" href="https://github.com/jasonzheshiou/Excel-AI-Automator"><span class="lv">L3</span><b>Excel-AI-Automator</b><span>Natural language to 19 reviewable Excel actions, with an offline rule-based fallback.</span></a>
+      </div>
+    </div>
+
+    <div class="eco-layer">
+      <div class="lab"><svg class="ic" aria-hidden="true"><use href="#p-target"/></svg><div class="lv">L2</div><h3>Measurement</h3><p>The layer everything else is checked against: ground truth, strict scoring, false-alarm accounting, frozen provenance.</p></div>
+      <div class="eco-nodes">
+        <a class="node" href="/pixel/research/life-insurance-experience-bench.html"><span class="lv">L2</span><b>Life Insurance Experience Bench</b><span>47 sealed scenarios, harness A/B, scorer v3, leak-gated zones, published corpora. ← the flagship.</span></a>
+        <a class="node" href="/pixel/research/underwriting-output-variance.html"><span class="lv">L2</span><b>Output-Variance Study</b><span>Repeated-invocation testing of the underwriter: same case 100 times, Wilson intervals, tier distributions. The second measured instrument.</span></a>
+      </div>
+    </div>
+
+    <div class="eco-layer">
+      <div class="lab"><svg class="ic" aria-hidden="true"><use href="#p-seed"/></svg><div class="lv">L1</div><h3>Data</h3><p>A deterministic world with a known answer key, so “correct” means something.</p></div>
+      <div class="eco-nodes">
+        <a class="node" href="https://github.com/jasonzheshiou/Synthetic_Life_Insurance_Data_Generator"><span class="lv">L1</span><b>Synthetic Data Generator</b><span>Australian Death / CI / TPD / IP experience, A/E ≈ 1.0 by construction, planted controls on actuals only, seed <span class="num">42</span>.</span></a>
+      </div>
+    </div>
+
+    <div class="substrate"><b>Shared substrate.</b> Everything above talks to the same kind of thing: an
+    OpenAI-compatible endpoint serving local Qwen models (3.6-27B, 3.6-35B-A3B, 3.8-27B) on a box on the LAN.
+    No API keys, no cloud dependency — which is also what makes the accuracy and cost numbers on this site
+    reproducible on ordinary hardware.</div>
+  </div>
+</div>
+
+<div class="wrap band"><div class="split-32"><article class="prose">
+<h2 id="edges">The interlock, edge by edge</h2>
+<p>An ecosystem claim is worth nothing without named edges. Each of these is visible in a file, not implied by
+a tagline.</p>
+<div class="tablewrap"><table class="tbl">
+<thead><tr><th>from → to</th><th>what crosses the edge</th><th>where you can check it</th></tr></thead>
+<tbody>
+<tr><td><b>Generator → Bench</b></td><td>Every scenario. The bench never reimplements the generator; it imports it as a library, one pipeline call per scenario, pinned to commit <span class="mono">66a73d0</span>, seed 42, scale <em>full</em> (250 000 policies).</td><td><code>scripts/generate_scenarios.py</code> · <code>GEN_ROOT</code> sibling path · <code>config/scenarios.yaml</code></td></tr>
+<tr><td><b>Bench → Generator</b></td><td>Constraints back the other way: split-disjointness by benefit × control × window × factor, per-scenario sanity checks and a byte-level leak scan before anything reaches the model-facing tree.</td><td><code>tests/test_registry.py</code> · <code>scripts/leakcheck.py</code></td></tr>
+<tr><td><b>Generator → Underwriter</b></td><td>Bulk synthetic applicant profiles for testing and validation of the agent pipeline — no real policyholder data anywhere.</td><td><code>data/generate_synthetic.py</code>, cross-repo table in README</td></tr>
+<tr><td><b>Dashboard → Underwriter</b></td><td>Industry benchmark rates and claims experience feeding comparative evidence into underwriting decisions, and eventually into pricing and reserving assumptions.</td><td>benchmark data per 1 000 lives by age / occupation / gender</td></tr>
+<tr><td><b>Standard_Inquirer → Underwriter</b></td><td>Regulatory reference checks and policy-condition lookups: the same APRA / Actuaries Institute corpus, retrieved through a vector knowledge base.</td><td>ChromaDB store + standards ingestion pipeline</td></tr>
+<tr><td><b>Underwriter → Variance study</b></td><td>The engine becomes an instrument: <code>tests/stability/</code> runs one applicant through the LLM path ~100 times and records tier distributions, consistency rates, Wilson intervals and failure rates — the numbers behind <a href="/pixel/research/underwriting-output-variance.html">the five findings</a>.</td><td><code>tests/stability/run_recorder.py</code> · <code>distribution_analyzer.py</code></td></tr>
+<tr><td><b>Variance study ↔ Bench</b></td><td>Two independent studies converging on one rule. The bench shows a harness tuned for one model loses accuracy on the next; the variance study shows a variance profile is only valid for the configuration tested. Same conclusion, different instruments.</td><td><a href="/pixel/research/life-insurance-experience-bench.html">study 01</a> · <a href="/pixel/research/underwriting-output-variance.html">study 02</a></td></tr>
+<tr><td><b>Underwriter → the Bench's rule</b></td><td>The underwriter's prompts, escalation thresholds and debate protocol are a harness. The bench's central finding says they must be re-measured whenever the model changes — output variance measured the same way (<span class="num">0 %</span> deterministic vs <span class="num">0–47 %</span> LLM path).</td><td><code>tests/stability/</code> · <code>docs/llm_temperature_sensitivity_results.md</code></td></tr>
+<tr><td><b>Bench → Operations</b></td><td>A 72-call held-out exam takes <span class="num">21.9 h</span> of one shared local slot. Scheduling against a busy server and knowing the moment it frees up stops being a convenience and becomes part of the experiment rig.</td><td><code>LLM_Status_Watch</code> — metrics poll, idle-held-5-min → push</td></tr>
+<tr><td><b>Bench ↔ Dashboard</b></td><td>The same actuarial statistics on two different hosts: the dashboard runs credibility, Mann-Kendall and GLM-style selection for a human reader; the bench's <code>stats_pack.py</code> computes gradient / R² / excursion / overdispersion diagnostics for a model.</td><td><code>scripts/stats_pack.py</code> · dashboard <code>README_Methodology.md</code></td></tr>
+<tr><td><b>Method → every layer</b></td><td>How the layers were built is part of what they can claim: delegated agent loops with execution logs and per-pass artefacts, black-box behavioural verification instead of code review, and asynchronous handoffs so a run can be left and resumed. That is why the artefacts are inspectable rather than merely present.</td><td><a href="/pixel/method.html">method</a> · <code>docs/HANDOFF_CONTEXT.md</code> · <code>docs/HANDOFF_RUN_SCENARIOS.md</code> · per-pass manifests</td></tr>
+<tr><td><b>Craft layer → everything</b></td><td>Method habits, imported deliberately: write the question before the sweep, report the noise floor, keep a per-pass audit trail, and never generate a question you cannot defend.</td><td><code>Piticle_Life/docs/findings.md</code> · <code>Pixel_Storybook</code> manifests · <code>little_games</code> generator guarantees</td></tr>
+</tbody></table></div>
+
+<h2 id="rule">The one rule that binds the layers</h2>
+<blockquote>After any model change, re-measure the model-and-harness pair and re-tune on recorded evidence.</blockquote>
+<p>Three requirements fall out of that rule, and they are the reason the layers are ordered this way rather
+than being a pile of apps:</p>
+<div class="flow">
+  <div class="step"><div class="n">1</div><p><b>Ground truth must be generated, not curated.</b> A curated answer
+  key drifts, and you cannot regenerate it when you extend the test. That is L1's job.</p></div>
+  <div class="step"><div class="n">2</div><p><b>The scorer must count false alarms, not just hits.</b> Otherwise
+  a model can raise its score by talking more. That is L2's job, and it is the reason L2 sits above the
+  applications in the diagram rather than beside them.</p></div>
+  <div class="step"><div class="n">3</div><p><b>Every claim ships the bytes behind it.</b> Frozen harness
+  snapshots, pinned generator commits, decision logs, per-pass manifests — so the claim can be checked rather
+  than trusted. That is L4–L6's job.</p></div>
+</div>
+
+<h2 id="maturity">What each layer can actually support</h2>
+<p>The honest version of an ecosystem page says which parts are measured and which are still demonstrations.</p>
+<div class="tablewrap"><table class="tbl">
+<thead><tr><th>layer</th><th>evidence status</th><th>what is missing to raise it</th></tr></thead>
+<tbody>
+<tr><td>L1 Data</td><td><em>verified</em> — bit-deterministic on seed and commit; per-scenario sanity gates</td><td>lapse model is still a placeholder</td></tr>
+<tr><td>L2 Measurement</td><td><em>measured</em> — two model campaigns, published corpora, sealed truth</td><td>a fresh held-out exam (the current one is spent); real jail for tool calls</td></tr>
+<tr><td>L3 Judgement</td><td>demonstrated — methods and audit scaffolding are real, results are not scored</td><td>run dashboard outputs through the bench's scorer</td></tr>
+<tr><td>L4 Governance</td><td>partly measured — <a href="/pixel/research/underwriting-output-variance.html">output variance is measured</a>; decision quality is not scored</td><td>an underwriting exam with planted outcomes, mirroring L2</td></tr>
+<tr><td>L5 Operations</td><td><em>in service</em> — LLM_Status_Watch runs on real hardware</td><td>M365 loop is an untested blueprint</td></tr>
+<tr><td>L6 Craft</td><td>measured where pre-registered</td><td>nothing — these are deliberate side projects</td></tr>
+</tbody></table></div>
+
+<h2 id="chain">How one thing led to the next</h2>
+<p>Months are the last recorded activity on each repository (read 2026-10-19). The order is the actual story: each
+project exists because the previous one hit a wall, which is what makes "ecosystem" more than a shared tag.</p>
+<div class="timeline">
+      <div class="t-item"><div class="when">2026 · Apr</div><h3>Fix the data plumbing first</h3>
+        <p>Schema inspection, join strategies and ERDs from a natural-language brief; natural language to a
+        reviewable list of Excel actions. Unglamorous, and the reason everything later had data to stand on.</p>
+        <div class="from">Data_Schema_analyser · Excel-AI-Automator</div></div>
+      <div class="t-item"><div class="when">2026 · May</div><h3>Do the real actuarial work, in the open</h3>
+        <p>A TPD incidence study with credibility, Mann-Kendall, GLM and tree models; conversational compliance
+        assessment against APRA standards. Both immediately wanted data nobody could publish.</p>
+        <div class="from">Experience Analysis Dashboard · Standard Inquirer</div></div>
+      <div class="t-item"><div class="when">2026 · Jun → Aug</div><h3>Build a world with a known answer</h3>
+        <p>So: a deterministic generator for Australian Death / CI / TPD / IP experience with planted controls and
+        A/E ≈ 1.0 by construction. Then a multi-agent underwriting engine on top — which instantly raised the
+        question of whether an LLM gives the same answer twice.</p>
+        <div class="from">Synthetic Data Generator · Multi-Agents Underwriter</div></div>
+      <div class="t-item"><div class="when">2026 · Aug → Oct</div><h3>Measure, or stop claiming</h3>
+        <p>The underwriter's variance studies and the A/E benchmark grew from one instinct: no claim without a
+        generated answer key, a scorer that counts false alarms, and frozen bytes behind the number.</p>
+        <div class="from">Output-variance study · Life Insurance Experience Bench</div></div>
+      <div class="t-item"><div class="when">2026 · Oct</div><h3>Operations, and the side quests that keep me honest</h3>
+        <p>A 21.9-hour exam on one shared local server makes scheduling an engineering problem. Two side projects
+        keep the habits sharp: pre-registered questions with noise floors, and generators that refuse to ask an
+        unfair question.</p>
+        <div class="from">LLM_Status_Watch · Piticle_Life · Pixel_Storybook</div></div>
+    </div>
+    
+<p class="small muted">The same order in checklist form, with the design lessons each step taught, is on the
+<a href="/pixel/projects.html">projects page</a>; the development method they were built with is on the
+<a href="/pixel/method.html">method page</a>.</p>
+
+<h2 id="open">Why open</h2>
+<p>Underwriting rules engines are the operational backbone of insurance: they encode what risks are
+acceptable, on what terms, at what price. Building them is hard; explaining them to auditors, regulators and
+business stakeholders is harder. A closed underwriting engine is a governance black box — and the profession's
+answer to a black box should not be another black box.</p>
+<p>So the design constraints repeat across layers: rules as declarative versioned documents rather than code
+buried in a service; escalation paths and permissions as first-class configuration rather than prompt
+wording; agents that propose while named humans decide; and every artifact MIT-licensed so a regulator, an
+auditor or another actuary can read the reasoning chain rather than take it on trust.</p>
+
+<div class="note"><h4>If you are an actuary, engineer or regulator</h4>
+<p>Corrections to the underwriting logic, the compliance mappings and the scoring rubric are the most useful
+contributions this ecosystem can receive. The decision record is in the repos' logs, so a disagreement can be
+argued against evidence rather than against a summary. Open an issue on the relevant repo.</p></div>
+
+</article><aside><div class="toc" role="navigation" aria-label="On this page">
+<h4 style="margin-top:0">On this page</h4>
+<a href="#edges">The interlock, edge by edge</a><br>
+<a href="#rule">The rule that binds them</a><br>
+<a href="#maturity">What each layer can support</a><br>
+<a href="#chain">How one thing led to the next</a><br>
+<a href="#open">Why open</a><br>
+<h4>Read next</h4>
+<a href="/pixel/research/life-insurance-experience-bench.html">The benchmark findings</a><br>
+<a href="/pixel/research/underwriting-output-variance.html">The variance study</a><br>
+<a href="/pixel/research/findings.html">Findings ledger</a><br>
+<a href="/pixel/method.html">How the work gets done</a><br>
+<a href="/pixel/projects.html">All 13 repositories</a>
+</div></aside></div></div>
+
+</main>
+
+<footer class="site"><div class="wrap cols">
+  <div><h4>About this site</h4>
+    <p class="small muted">Jason Ou — FIAA, senior data scientist and analytic actuary. Open-source
+    life-insurance data tools, benchmarks and governance patterns for actuarial work with AI.</p></div>
+  <div><h4>Research</h4><ul>
+    <li><a href="/pixel/research/life-insurance-experience-bench.html">The A/E benchmark</a></li>
+    <li><a href="/pixel/research/underwriting-output-variance.html">Output-variance study</a></li>
+    <li><a href="/pixel/research/findings.html">Findings ledger</a></li>
+    <li><a href="/pixel/ecosystem.html">Ecosystem map</a></li></ul></div>
+  <div><h4>Elsewhere</h4><ul>
+    <li><a href="https://github.com/jasonzheshiou">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/zheshi-jason-ou-8780203a">LinkedIn</a></li>
+    <li><a href="/pixel/method.html">How I work</a></li>
+    <li><a href="/">Line edition of this site</a></li>
+    <li><a href="/pixel/projects.html">All repositories</a></li></ul></div>
+</div><div class="wrap fine">
+  <span>No analytics, no third-party scripts beyond the font stylesheet.</span>
+  <span class="prov">© 2026 Jason Ou · content MIT-licensed</span>
+</div></footer>
+</body>
+</html>

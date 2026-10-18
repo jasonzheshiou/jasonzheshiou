@@ -177,26 +177,32 @@ research/life-insurance-experience-bench.html   the flagship write-up
 research/findings.html                  eight measured findings
 ecosystem.html                          how the 13 repos interlock
 projects.html · about.html · method.html · pixel.html · 404.html
-assets/site.css · site.js · charts.js   one stylesheet, two small scripts
+pixel/                                  the whole site again, in pixel art
+pixel/pixel.css                         the pixel skin, loaded over site.css
+assets/site.css · site.js · charts.js   one stylesheet, two small scripts, shared
 assets/sprite.html                      22 inline icons (the line edition)
-assets/pixel-sprite.html                the same 22 as pixel art, fetched on demand
+assets/pixel-sprite.html                the same 22 as pixel art
 assets/pixel-sheet.png                  all 22 glyphs on one contact sheet, 3.6 KB
 ```
 
-### Two editions of the same site
+### Two sites, one set of words
 
-Every icon exists twice. The default site draws them as 1.7-px line work from an inline `<symbol>` sheet; the
-**pixel edition** (`◼ pixel` in the nav, `?pixel=1` on any URL, or `/pixel.html`) redraws the same 22 shapes as
-32 × 32 pixel art using the Bresenham and midpoint primitives from
-[Pixel_Storybook](https://github.com/jasonzheshiou/Pixel_Storybook), and swaps the borders, shadows and substrate
-for hard edges. Nine of them did not survive that conversion automatically and were redrawn by hand as character
-matrices — the same path that repository uses when the model server has no vision tower.
+`/` is drawn with 1.7-px vector strokes; **`/pixel/`** draws the same 22 shapes as 32 × 32 pixel art with the
+Bresenham and midpoint primitives from
+[Pixel_Storybook](https://github.com/jasonzheshiou/Pixel_Storybook), with a pixel typeface, flat surfaces and drop
+shadows instead of blur. Nine glyphs did not survive the conversion automatically and were redrawn by hand as
+character matrices — the same path that repository uses when the model server has no vision tower.
+
+The pixel site is generated, not hand-copied: a script kept outside the published tree copies each page across,
+retargets every icon reference to the pixel sheet, moves the links under `/pixel/` and loads the extra skin. One
+sentence corrected in the vector site is therefore correct in both. Each site's top bar links to the other, and
+`/pixel.html` documents the conversion in both editions (`/pixel/how.html`).
 
 Two things worth knowing if you poke at it. A clone behind `<use>` is invisible to document CSS, so sprite shapes
 carry presentation attributes driven by custom properties (`stroke="var(--ic-cyan)"`) rather than classes; the
-first version painted black blobs while the markup looked perfect. And the pixel sheet is deliberately *not*
-inlined: `site.js` fetches it only when the pixel edition is asked for, so the default page stays at 33 KB
-(9 KB gzipped) and the icons still render with JavaScript switched off.
+first version painted black blobs while the markup looked perfect. And the pixel sheet is not inlined on the vector
+site — it is fetched where it is actually shown, so the default page stays at 33 KB (9 KB gzipped) and the icons
+still render with JavaScript switched off.
 
 Preview locally, then push to `main`:
 

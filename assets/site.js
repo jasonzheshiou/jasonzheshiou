@@ -20,69 +20,6 @@
   }
 
 
-  /* ---------- pixel edition ---------- */
-  /* The pixel sprite is a second <symbol> set (#p-*) carried on every page. A
-     <use> clone cannot be re-targeted by CSS, so switching editions means
-     rewriting the href — a dozen nodes, and it is reversible. */
-  var pixelOn = false;
-  try {
-    var qp = new URLSearchParams(location.search).get("pixel");
-    if (qp !== null) { pixelOn = qp === "1"; try { localStorage.setItem("pixel", pixelOn ? "1" : "0"); } catch (e) {} }
-    else { pixelOn = localStorage.getItem("pixel") === "1"; }
-  } catch (e) {}
-
-  var pixelLoading = false;
-  function ensurePixelSheet(then) {
-    if (document.getElementById("p-seed")) { then(); return; }
-    if (pixelLoading) return;
-    pixelLoading = true;
-    fetch("/assets/pixel-sprite.html")
-      .then(function (r) { return r.ok ? r.text() : Promise.reject(new Error("no sheet")); })
-      .then(function (txt) {
-        // parsed as HTML on purpose: the HTML parser puts <svg> in the SVG
-        // namespace, which an image/svg+xml parse only does if the file
-        // declares xmlns — and only SVG-namespaced elements render here.
-        var doc = new DOMParser().parseFromString(txt, "text/html");
-        var svg = doc.querySelector("svg");
-        if (!svg || !svg.querySelector("symbol")) { pixelLoading = false; return; }
-        var node = document.importNode(svg, true);
-        node.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
-        document.getElementById("main").appendChild(node);
-        pixelLoading = false;
-        then();
-      })
-      .catch(function () { pixelLoading = false; });
-  }
-
-  function applyPixel(on) {
-    if (on && !document.getElementById("p-seed")) { ensurePixelSheet(function () { applyPixel(true); }); return; }
-    document.documentElement.dataset.pixel = on ? "1" : "0";
-    var uses = document.querySelectorAll("use");
-    for (var i = 0; i < uses.length; i++) {
-      var h = uses[i].getAttribute("href") || "";
-      if (h.indexOf("#i-") === 0 && on) uses[i].setAttribute("href", "#p-" + h.slice(3));
-      else if (h.indexOf("#p-") === 0 && !on) uses[i].setAttribute("href", "#i-" + h.slice(3));
-    }
-    var icons = document.querySelectorAll("svg.ic");
-    for (var j = 0; j < icons.length; j++) {
-      if (on) icons[j].classList.add("px"); else icons[j].classList.remove("px");
-    }
-    if (pb) { pb.setAttribute("aria-pressed", on ? "true" : "false"); pb.textContent = on ? "◼ line" : "◼ pixel"; }
-  }
-
-  var locked = document.documentElement.hasAttribute("data-pixel-lock");
-
-  var pb = document.createElement("button");
-  pb.className = "pixel-btn"; pb.type = "button";
-  pb.addEventListener("click", function () {
-    pixelOn = !pixelOn;
-    try { localStorage.setItem("pixel", pixelOn ? "1" : "0"); } catch (e) {}
-    applyPixel(pixelOn);
-  });
-  var nav = document.querySelector("nav.main");
-  if (nav && !locked) nav.appendChild(pb);
-  if (locked) { pixelOn = true; applyPixel(true); } else { applyPixel(pixelOn); }
-
   /* ---------- copy buttons on code blocks ---------- */
   var pres = document.querySelectorAll("pre.code");
   for (var p = 0; p < pres.length; p++) {
