@@ -415,6 +415,9 @@ footer.site .fine { font-size: 12px; color: var(--dim); border-top: 1px solid va
 /* ---------- helpers ---------- */
 .split { display: grid; gap: 2rem; grid-template-columns: 1fr 1fr; }
 .split-32 { display: grid; gap: 2.4rem; grid-template-columns: 1.4fr .6fr; align-items: start; }
+/* Grid items default to min-width:auto, which lets one wide table or code line
+   push the whole column past the viewport. The inner scrollers handle width. */
+.split > *, .split-32 > *, .two > *, .what > *, .plain > * { min-width: 0; }
 @media (max-width: 900px) { .split, .split-32 { grid-template-columns: 1fr; } .toc { position: static; } }
 .muted { color: var(--muted); }
 .small { font-size: 13.5px; }
@@ -427,16 +430,14 @@ footer.site .fine { font-size: 12px; color: var(--dim); border-top: 1px solid va
 .ic { width: 40px; height: 40px; flex: none; color: var(--dim); }
 .ic.sm { width: 26px; height: 26px; }
 .ic.lg { width: 58px; height: 58px; }
-.ic circle, .ic rect, .ic path, .ic line, .ic polyline {
-  fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+/* A <use> clone cannot be reached by document CSS, so the sprite carries
+   presentation attributes driven by these custom properties instead. */
+.ic, .diagram .glyph {
+  stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+  --ic-dim: var(--dim); --ic-cyan: var(--cyan); --ic-amber: var(--amber); --ic-violet: var(--violet);
 }
-.ic .a { stroke: var(--cyan); filter: drop-shadow(0 0 5px rgba(53,214,255,.4)); }
-.ic .b { stroke: var(--amber); filter: drop-shadow(0 0 5px rgba(255,176,77,.3)); }
-.ic .c { stroke: var(--violet); }
-.ic .f { fill: currentColor; }
-.ic .a.f { fill: var(--cyan); } .ic .b.f { fill: var(--amber); }
-.ic .c.f { fill: var(--violet); }
-[data-theme="light"] .ic .a, [data-theme="light"] .ic .b, [data-theme="light"] .ic .c { filter: none; }
+.ic.tint-cyan { --ic-dim: var(--cyan); }
+.ic.solid rect, .ic.solid circle, .ic.solid path, .ic.solid line, .ic.solid polyline { fill: currentColor; }
 .impact {
   display: inline-block; margin-top: .6rem; font: 500 10px/1.3 var(--mono); letter-spacing: .1em;
   text-transform: uppercase; color: var(--cyan); padding: .4rem .5rem;
@@ -476,6 +477,47 @@ footer.site .fine { font-size: 12px; color: var(--dim); border-top: 1px solid va
 .figscroll { overflow-x: auto; border: 1px solid var(--line); background: var(--panel); backdrop-filter: blur(9px); padding: 1rem 1.1rem 1.15rem; margin-top: 1.7rem; }
 .figscroll > svg { min-width: 660px; display: block; width: 100%; height: auto; }
 .figscroll figcaption { margin-top: .7rem; font: 400 11.5px/1.6 var(--mono); color: var(--dim); letter-spacing: .04em; }
+
+
+/* ---------- pixel edition ---------- */
+/* Same pages, drawn with whole pixels. Driven by html[data-pixel="1"], which
+   site.js sets from the nav toggle or ?pixel=1, and by the #p-* sprite. */
+html[data-pixel="1"] { --glow: none; }
+html[data-pixel="1"] body::before {
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+html[data-pixel="1"] body::after { display: none; }
+html[data-pixel="1"] .ic { width: 32px; height: 32px; stroke-width: 0; }
+html[data-pixel="1"] .ic.sm { width: 24px; height: 24px; }
+html[data-pixel="1"] .ic.lg { width: 64px; height: 64px; }
+html[data-pixel="1"] .panel, html[data-pixel="1"] .card, html[data-pixel="1"] .module,
+html[data-pixel="1"] .metric, html[data-pixel="1"] .figscroll, html[data-pixel="1"] .spec,
+html[data-pixel="1"] .flow, html[data-pixel="1"] .ledger, html[data-pixel="1"] .plain,
+html[data-pixel="1"] .tbl, html[data-pixel="1"] .what, html[data-pixel="1"] .two,
+html[data-pixel="1"] .mean, html[data-pixel="1"] .pillars, html[data-pixel="1"] .pairs,
+html[data-pixel="1"] .arc, html[data-pixel="1"] .chartbox {
+  backdrop-filter: none; background: var(--panel-2);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+}
+[data-theme="light"][data-pixel="1"] .panel, [data-theme="light"][data-pixel="1"] .card,
+[data-theme="light"][data-pixel="1"] .module, [data-theme="light"][data-pixel="1"] .metric,
+[data-theme="light"][data-pixel="1"] .plain, [data-theme="light"][data-pixel="1"] .chartbox {
+  box-shadow: 4px 4px 0 rgba(10, 30, 48, 0.14);
+}
+html[data-pixel="1"] .btn, html[data-pixel="1"] .status, html[data-pixel="1"] .badge,
+html[data-pixel="1"] .impact, html[data-pixel="1"] .chip { border-width: 2px; box-shadow: 2px 2px 0 rgba(0,0,0,.4); }
+html[data-pixel="1"] .hero h1, html[data-pixel="1"] h1, html[data-pixel="1"] h2 { text-shadow: none; }
+html[data-pixel="1"] .diagram .flow { stroke-dasharray: 4 4; }
+html[data-pixel="1"] .status::before { animation: none; box-shadow: none; }
+.pixel-btn {
+  font: 500 10.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); background: transparent; border: 1px solid var(--line);
+  padding: .42rem .5rem; cursor: pointer;
+}
+.pixel-btn:hover { color: var(--cyan); border-color: var(--cyan); }
+.pixel-btn[aria-pressed="true"] { color: var(--ink); background: var(--cyan-bg); border-color: var(--cyan); }
 
 @media (prefers-reduced-motion: reduce) { .diagram .flow { animation: none; } }
 
