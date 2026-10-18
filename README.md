@@ -43,6 +43,22 @@ not accuracy**.
 Findings, method and governance asks:
 <https://jasonzheshiou.github.io/research/underwriting-output-variance.html>.
 
+## 🛠 How the work actually gets done
+
+Built in broken time between a full-time job and childcare, which forced a method:
+
+- **Agent-loop execution** — delegate the loop, not the line: a written contract, an execution surface, an artefact
+  trail and a stopping rule. The underwriter's application code was written by the local model it studies; the
+  benchmark's harness was built by an agent on a third model, so no model tuned the exam it sat.
+- **Black-box behavioural verification** — one hypothesis, one edit, re-check the neighbours, keep or revert,
+  snapshot the bytes. Held-out results never feed tuning. Steering happens outside the model: prompts, harness,
+  rules, combine rules, sampling settings, tool surface.
+- **Asynchronous human-in-the-loop** — write the handoff document, launch the unattended run, leave, get pinged when
+  the shared server frees up, return as the supervisor and validation checkpoint. Resume is the default
+  (`--skip-existing`, `flock`, one status line).
+
+Method write-up with the evidence: <https://jasonzheshiou.github.io/method.html>.
+
 ---
 
 ## About Me

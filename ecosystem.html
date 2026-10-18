@@ -36,7 +36,8 @@
     <a href="/research/underwriting-output-variance.html">Variance</a>
     <a href="/research/findings.html">Findings</a>
     <a href="/ecosystem.html" aria-current="page">Ecosystem</a>
-    <a href="/projects.html">Projects</a>
+    <a href="/projects.html">Projects</a>    <a href="/method.html">Method</a>
+
     <a href="/about.html">About</a>
     <button class="theme-btn" type="button">☾</button>
   </nav>
@@ -133,6 +134,7 @@ a tagline.</p>
 <tr><td><b>Underwriter → the Bench's rule</b></td><td>The underwriter's prompts, escalation thresholds and debate protocol are a harness. The bench's central finding says they must be re-measured whenever the model changes — output variance measured the same way (<span class="num">0 %</span> deterministic vs <span class="num">0–47 %</span> LLM path).</td><td><code>tests/stability/</code> · <code>docs/llm_temperature_sensitivity_results.md</code></td></tr>
 <tr><td><b>Bench → Operations</b></td><td>A 72-call held-out exam takes <span class="num">21.9 h</span> of one shared local slot. Scheduling against a busy server and knowing the moment it frees up stops being a convenience and becomes part of the experiment rig.</td><td><code>LLM_Status_Watch</code> — metrics poll, idle-held-5-min → push</td></tr>
 <tr><td><b>Bench ↔ Dashboard</b></td><td>The same actuarial statistics on two different hosts: the dashboard runs credibility, Mann-Kendall and GLM-style selection for a human reader; the bench's <code>stats_pack.py</code> computes gradient / R² / excursion / overdispersion diagnostics for a model.</td><td><code>scripts/stats_pack.py</code> · dashboard <code>README_Methodology.md</code></td></tr>
+<tr><td><b>Method → every layer</b></td><td>How the layers were built is part of what they can claim: delegated agent loops with execution logs and per-pass artefacts, black-box behavioural verification instead of code review, and asynchronous handoffs so a run can be left and resumed. That is why the artefacts are inspectable rather than merely present.</td><td><a href="/method.html">method</a> · <code>docs/HANDOFF_CONTEXT.md</code> · <code>docs/HANDOFF_RUN_SCENARIOS.md</code> · per-pass manifests</td></tr>
 <tr><td><b>Craft layer → everything</b></td><td>Method habits, imported deliberately: write the question before the sweep, report the noise floor, keep a per-pass audit trail, and never generate a question you cannot defend.</td><td><code>Piticle_Life/docs/findings.md</code> · <code>Pixel_Storybook</code> manifests · <code>little_games</code> generator guarantees</td></tr>
 </tbody></table></div>
 
@@ -189,6 +191,7 @@ argued against evidence rather than against a summary. Open an issue on the rele
 <a href="/research/life-insurance-experience-bench.html">The benchmark findings</a><br>
 <a href="/research/underwriting-output-variance.html">The variance study</a><br>
 <a href="/research/findings.html">Findings ledger</a><br>
+<a href="/method.html">How the work gets done</a><br>
 <a href="/projects.html">All 13 repositories</a>
 </div></aside></div></div>
 
@@ -206,6 +209,7 @@ argued against evidence rather than against a summary. Open an issue on the rele
   <div><h4>Elsewhere</h4><ul>
     <li><a href="https://github.com/jasonzheshiou">GitHub</a></li>
     <li><a href="https://www.linkedin.com/in/zheshi-jason-ou-8780203a">LinkedIn</a></li>
+    <li><a href="/method.html">How I work</a></li>
     <li><a href="/projects.html">All repositories</a></li></ul></div>
 </div><div class="wrap fine">
   <span>No analytics, no third-party scripts beyond the font stylesheet.</span>

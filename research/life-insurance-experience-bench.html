@@ -32,7 +32,8 @@
     <a href="/research/underwriting-output-variance.html">Variance</a>
     <a href="/research/findings.html">Findings</a>
     <a href="/ecosystem.html">Ecosystem</a>
-    <a href="/projects.html">Projects</a>
+    <a href="/projects.html">Projects</a>    <a href="/method.html">Method</a>
+
     <a href="/about.html">About</a>
     <button class="theme-btn" type="button">☾</button>
   </nav>
@@ -222,6 +223,14 @@ end is still drift, that a one-year spike inside a swinging line is volatility, 
 campaigns stayed inside <code>artifacts/</code> — but that was the model's choice, and a direct probe showed
 model-authored code could read elsewhere. Anyone rebuilding this should implement a real jail before
 running anything untrusted.</p></div>
+
+<div class="note"><h4>Who built the harness — and why it matters who</h4>
+<p>Neither subject model wrote its own harness. Both lineages were built by an operator-side agent running a
+<em>third</em> model, deliberately not one of the two being examined, so that no model tuned the exam it later sat.
+Each pass was one hypothesis and one edit, tested on the affected books, re-checked against the neighbours it could
+have disturbed, then kept or reverted with the code and prompt snapshotted — seven passes in all, 307 diary entries,
+268 of them ending in a harness edit. The record is explicit that a human still chose which failures to pursue: the
+delegation covered effort, not judgement. <a href="/method.html">The method behind this is written up here.</a></p></div>
 
 <h2 id="measurement">How an answer is measured</h2>
 <p>A <strong>unit</strong> is one planted control in one run; a control planted across a whole scenario
@@ -549,6 +558,7 @@ limit: adding lapse, expense or reserve A/E means a new scenario family and a ne
   <div><h4>Elsewhere</h4><ul>
     <li><a href="https://github.com/jasonzheshiou">GitHub</a></li>
     <li><a href="https://www.linkedin.com/in/zheshi-jason-ou-8780203a">LinkedIn</a></li>
+    <li><a href="/method.html">How I work</a></li>
     <li><a href="/projects.html">All repositories</a></li>
   </ul></div>
 </div><div class="wrap fine">
