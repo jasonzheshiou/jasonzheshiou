@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>Findings ledger — what the measurements actually say · Jason Ou</title>
+<meta name="description" content="Eight measured findings from the life-insurance A/E benchmark and its neighbouring repositories: harness transfer, the optimism gap, over-claiming versus mislabelling, identifiability, and output variance in underwriting.">
+<meta property="og:title" content="Findings ledger — measured results from the actuarial AI ecosystem">
+<meta property="og:description" content="Each finding states the number, what it changes in practice, and the file it came from.">
+<meta property="og:url" content="https://jasonzheshiou.github.io/research/findings.html">
+<meta property="og:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<meta name="twitter:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<link rel="canonical" href="https://jasonzheshiou.github.io/research/findings.html">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
+  <nav class="main">
+    <a href="/research/findings.html" aria-current="page">Findings</a>
+    <a href="/research/life-insurance-experience-bench.html">The Bench</a>
+    <a href="/ecosystem.html">Ecosystem</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/about.html">About</a>
+    <button class="theme-btn" type="button">☾</button>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<div class="wrap hero">
+  <p class="eyebrow">Research · Findings</p>
+  <h1>The ledger, not the brochure</h1>
+  <p class="lede">Eight findings that came out of the measurements rather than being asserted before them.
+  Each one states the number, what it changes in practice, and the file it came from — so a reader can argue
+  with the evidence instead of with a summary of it.</p>
+  <div class="hero-meta">
+    <span class="chip">2 models × 2 harnesses</span>
+    <span class="chip">23–24 held-out books × 3 runs</span>
+    <span class="chip">temperature <span class="num">1.0</span></span>
+    <span class="chip">every cell has a denominator</span>
+  </div>
+</div>
+
+<div class="wrap band"><div class="split-32">
+<article class="prose">
+
+<h2 id="f1">1 · A harness is part of the deployment, not neutral infrastructure</h2>
+<p><strong>Measured:</strong> the same wrapper was worth <span class="num">≈24</span> points of precision to
+Qwen3.8-27B and <span class="num">≈6</span> points of accuracy to Qwen3.6-27B. Unaided, 3.8 posted
+<span class="num">65.7 %</span> FP/claim — <span class="num">34.3 %</span> precision — on the same books it
+reached 58.1 % precision with its harness.</p>
+<p><strong>What it changes:</strong> what a harness compensates for — how eagerly a model asserts, how much
+it verifies, whether it reaches for a tool — is behaviour, and behaviour moves when a model is retrained even
+when its architecture does not. So the artefact under governance is the <em>pair</em>: model plus harness,
+versioned together, with the harness bytes snapshotted next to every result.</p>
+
+<h2 id="f2">2 · A harness does not transfer</h2>
+<p><strong>Measured:</strong> every cross-loaded cell scored below the tuned one. Handing 3.8 the harness
+built for 3.6 cost <span class="num">−0.9</span> accuracy and <span class="num">−1.2</span> precision points.
+Early in the campaign cross-loading looked like an <span class="num">+8.3</span>-point gain at 9 books;
+it decayed to <span class="num">−1</span> by 23 and the claim was withdrawn.</p>
+<p><strong>What it changes:</strong> a new model version inherits an <em>unproven</em> harness, not a working
+one. The boring procedure — tune on the optimization split, re-measure the pair, report only held-out — is
+the whole finding. The 2 × 2 that supports it is two subjects on one serving stack: a real signal, not a
+general theory.</p>
+
+<h2 id="f3">3 · The optimism gap is about 30 points, for both models</h2>
+<p><strong>Measured:</strong> 3.6 <span class="num">95.5 % → 63.4 %</span> (<span class="num">−32.1</span>),
+3.8 <span class="num">97.7 % → 69.1 %</span> (<span class="num">−28.6</span>) moving from the 23 books it was
+tuned on to 24 unseen books. This is a property of the benchmark and harness, not of either model.</p>
+<p><strong>What it changes:</strong> optimization-split scores are a ranking device. Quoting them as expected
+production performance overstates by roughly a third of the scale — which is how a model that looks excellent
+in a pilot turns mediocre in a portfolio. The held-out split here is spent and published with its answers, so
+it can never be reused as an unseen exam.</p>
+
+<h2 id="f4">4 · Over-claiming and mislabelling are different diseases</h2>
+<p><strong>Measured:</strong> decomposing false alarms into mislabels plus inventions: 3.8 emitted
+<span class="num">154</span> claims for <span class="num">123</span> truths with
+<span class="num">+31</span> pure inventions; 3.6 emitted <span class="num">129</span> claims with
+<span class="num">+6</span>. 3.6's errors are almost entirely mislabels — the right line, the wrong word.</p>
+<p><strong>What it changes:</strong> the remedy must match the disease. Over-claiming needs discipline
+(“do not report what is not there”); mislabelling needs vocabulary work. Confirmed experimentally: the
+3.6-specific pattern-vocabulary edits helped, and attempts to make 3.6 report less made it worse. A single
+blended score would have hidden both the diagnosis and the failed cure.</p>
+
+<h2 id="f5">5 · Cost changes the ranking, so it sits beside the score</h2>
+<p><strong>Measured:</strong> the same 72-call exam cost 3.6 <span class="num">0.89 M</span> tokens and
+<span class="num">5.9 h</span>, and 3.8 <span class="num">1.95 M</span> and <span class="num">21.9 h</span>.
+At median per answer — <span class="num">289 s</span> versus <span class="num">813 s</span> — that is about
+6 hours against about 16.</p>
+<p><strong>What it changes:</strong> 3.6 reaches roughly 93 % of 3.8's accuracy for about a third of the time
+and tokens, at better precision. Which model is “better” depends on whether a miss or a false alarm costs more
+where you intend to use it. Any governance pack that quotes accuracy without per-answer cost is quoting half a
+number.</p>
+
+<h2 id="f6">6 · The models differ almost entirely in one scenario family</h2>
+<p><strong>Measured:</strong> drift, recovery and volatility saturate at <span class="num">100 %</span>
+accuracy for every harnessed configuration. The recall gap lives in <code>systemic</code> (44 % vs 56 %) and
+<code>noise_trap</code> (both 50 %, worst case 0 % with 100 % FP/claim unharnessed). Unharnessed, 3.8 falsely
+accused the CLEAN book — nothing planted at all.</p>
+<p><strong>What it changes:</strong> a benchmark's discriminating power can hide in a minority of its own
+questions, so a single blended number tells you almost nothing about where a model will fail. Report by
+family; build lookalike traps; include a clean book; treat “the clean book was accused” as a headline
+event.</p>
+
+<h2 id="f7">7 · Not every miss is a model failure</h2>
+<p><strong>Measured:</strong> <code>sc-d72b95</code> planted a Death drift of 0.05/yr; fitted from the data it
+is <span class="num">+0.0253</span> with SE <span class="num">0.0251</span>, <span class="num">t = 1.01</span>
+against a critical 3.18 — the minimum detectable slope at 80 % power is
+<span class="num">+0.088/yr</span>, roughly twice what was planted. In <code>sc-f520e5</code> the volatility is
+real (<span class="num">F = 17.1</span>) and the competing “drift” reading is defensible from the same data.</p>
+<p><strong>What it changes:</strong> two “failures” were actually benchmark defects, and the model was at
+ceiling on the units the data support. Experience analysis has the same property on the other side of the
+table: some years you cannot tell, and the professional act is to say so. Auditing a miss before fixing a
+model is cheaper than the other way round.</p>
+
+<h2 id="f8">8 · A tool offered is not a tool used</h2>
+<p><strong>Measured:</strong> four sandboxed Python calls were offered to both models. 3.8 used them in
+about <span class="num">24 %</span> of held-out runs; 3.6 used them <span class="num">0 of 144</span>, after
+two deliberate activation attempts including mandatory-use wording. Its reasoning is sound — the evidence pack
+already contains the arithmetic.</p>
+<p><strong>What it changes:</strong> tool availability is an affordance, not a behaviour, and the asymmetry had
+consequences: the one hard failure in the whole study was a malformed tool request, which 3.6 structurally
+cannot produce. Dormant capability is sometimes a robustness advantage.</p>
+
+<h2 id="growth">The harness did not arrive finished</h2>
+<p>Qwen3.8's harness grew <span class="mono">v1.0 → v1.1 → v1.2 → v1.3 → v1.4 → v1.5 → v1.6e</span> over seven
+optimization passes and <span class="num">307</span> per-scenario diary entries, <span class="num">268</span>
+of which involved a harness review or edit. Every pass from p3 to p7 changed both harness files;
+<code>stats_pack.py</code> grew <span class="num">27,229 → 38,490</span> bytes in that span. The frozen bytes
+of v1.6e are preserved twice (<span class="mono">stats_pack.py 16e53e0ef0b097ab</span>,
+<span class="mono">run_zero_shot.py a4b967de975625f9</span>), and each corpus carries a
+<code>harness_snapshot/</code> so the comparison can be checked rather than trusted.</p>
+<div class="note"><h4>The edits that mattered were taxonomy, not phrasing</h4>
+<p>Not “be more careful”, but: a trend that reverts at the end is still drift; a one-year spike inside a
+swinging line is volatility; mild overdispersion is the normal texture of these scenarios; tiny age or
+duration cells are unreliable however extreme their A/E looks; Poisson z-scores are invalid on an
+overdispersed line.</p></div>
+
+<h2 id="reading">How to read a number from this project</h2>
+<div class="flow">
+  <div class="step"><div class="n">1</div><p><b>Name the denominator.</b> Accuracy is over units, FP/claim is
+  over claims. They never add to 100 % with each other, and the 23-book and 24-book views differ by whether the
+  recorded failure is counted.</p></div>
+  <div class="step"><div class="n">2</div><p><b>Quote accuracy and false alarms together.</b> Either can be
+  raised by behaviour that makes the other worse.</p></div>
+  <div class="step"><div class="n">3</div><p><b>Put cost beside the result it bought</b> — tokens and wall time
+  per answer, not just in an appendix.</p></div>
+  <div class="step"><div class="n">4</div><p><b>Report held-out only.</b> Tuning scores rank; they do not
+  predict.</p></div>
+  <div class="step"><div class="n">5</div><p><b>Cite the bytes.</b> A number should name the corpus, the harness
+  snapshot and the prompt that produced it.</p></div>
+</div>
+
+<h2 id="elsewhere">Findings outside the benchmark</h2>
+<p>The rest of the portfolio is not all measured to the same standard, and saying which parts are is part of
+the point.</p>
+<div class="cards">
+  <div class="card"><span class="id">Multi-Agents_Underwriter · measured</span>
+    <h3>Stochastic decisions can be bounded</h3>
+    <p>Deterministic rules path: <b>0 %</b> variance across repeat runs. LLM decision path:
+    <b>0–47 %</b>, concentrated on borderline cases. Changing temperature or seed shifts the decision, not
+    just the spread. A “highest-risk-wins” synthesis rule collapses end-to-end variance to
+    <b>0 %</b>.</p>
+    <div class="row"><span class="tag">tests/stability/</span><a href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter" class="small">repo</a></div></div>
+
+  <div class="card"><span class="id">Piticle_Life · measured</span>
+    <h3>Two of three claims died at their own noise floor</h3>
+    <p>Questions were written into <code>SPEC.md</code> <b>before</b> the sweeps that answered them: 48 runs
+    against pre-registered questions, and two of the three claims did not survive contact with their own noise
+    floor. The same discipline the benchmark applies to models, applied to my own hypotheses.</p>
+    <div class="row"><span class="tag">docs/findings.md</span><a href="https://github.com/jasonzheshiou/Piticle_Life" class="small">repo</a></div></div>
+
+  <div class="card"><span class="id">Bench · measured</span>
+    <h3>Two units are unidentifiable, and one failure is on the record</h3>
+    <p><code>sc-d72b95</code> and <code>sc-f520e5</code> are documented benchmark artefacts, not model
+    failures. <code>sc-e6ffa4</code> never completed under one configuration: excluded from every like-for-like
+    cell, diagnosed in full, and deliberately <b>not</b> patched.</p>
+    <div class="row"><span class="tag">docs/EXPERIMENT_INDEX.md §8</span></div></div>
+
+  <div class="card flat"><span class="id">Not yet measured — stated as a gap</span>
+    <h3>Three repos carry claims without evidence</h3>
+    <p>The experience-analysis dashboard, Standard_Inquirer and the data-schema analyser ship features and
+    architecture, and no measured accuracy or variance study. Under the standard above, that makes them
+    demonstrations for now. The benchmark's scoring harness is the template for fixing that, and the order is
+    deliberate: prove the measurement first, then the applications.</p>
+    <div class="row"><span class="tag">open gap</span></div></div>
+</div>
+
+<div class="fn">
+<strong>Sources</strong>
+<p class="prov">All numbers on this page are drawn from
+<a href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Bench/blob/8067f00/docs/MODEL_AND_HARNESS_EVOLUTION.md">MODEL_AND_HARNESS_EVOLUTION.md</a>
+(§1.4, §3.2, §3.5–3.11),
+<a href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Bench/blob/8067f00/docs/EXPERIMENT_INDEX.md">EXPERIMENT_INDEX.md</a>
+(§3, §6, §8) and <code>results/harness_final/</code> / <code>results/harness_q36_final/</code> at
+<span class="mono">8067f00</span>; and from
+<a href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter">Multi-Agents_Underwriter</a> at
+<span class="mono">cbedb1b</span> (variance tables and <code>tests/stability/</code>).</p>
+</div>
+
+</article>
+
+<aside><div class="toc" role="navigation" aria-label="Findings">
+<h4 style="margin-top:0">Findings</h4>
+<a href="#f1">1 · harness is deployment</a><br>
+<a href="#f2">2 · it does not transfer</a><br>
+<a href="#f3">3 · the −30-point gap</a><br>
+<a href="#f4">4 · over-claim vs mislabel</a><br>
+<a href="#f5">5 · cost changes the ranking</a><br>
+<a href="#f6">6 · one family separates them</a><br>
+<a href="#f7">7 · not every miss is a miss</a><br>
+<a href="#f8">8 · tools go unused</a><br>
+<h4>Context</h4>
+<a href="#growth">How the harness grew</a><br>
+<a href="#reading">How to read a number</a><br>
+<a href="#elsewhere">Findings elsewhere</a>
+</div></aside>
+</div></div>
+
+</main>
+
+<footer class="site"><div class="wrap cols">
+  <div><h4>About this site</h4>
+    <p class="small muted">Jason Ou — FIAA, senior data scientist and analytic actuary. Open-source
+    life-insurance data tools, benchmarks and governance patterns for actuarial work with AI.</p></div>
+  <div><h4>Research</h4><ul>
+    <li><a href="/research/life-insurance-experience-bench.html">The A/E benchmark</a></li>
+    <li><a href="/research/findings.html">Findings ledger</a></li>
+    <li><a href="/ecosystem.html">Ecosystem map</a></li></ul></div>
+  <div><h4>Elsewhere</h4><ul>
+    <li><a href="https://github.com/jasonzheshiou">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/zheshi-jason-ou-8780203a">LinkedIn</a></li>
+    <li><a href="/projects.html">All repositories</a></li></ul></div>
+</div><div class="wrap fine">
+  <span>No analytics, no third-party scripts beyond the font stylesheet.</span>
+  <span class="prov">© 2026 Jason Ou · content MIT-licensed</span>
+</div></footer>
+</body>
+</html>

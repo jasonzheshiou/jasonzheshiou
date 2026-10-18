@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>All repositories — 13 projects, sorted by what they prove · Jason Ou</title>
+<meta name="description" content="Every public repository: the synthetic life-insurance generator, the A/E benchmark, the experience analysis dashboard, the multi-agent underwriting engine, the compliance assessor and the tooling around them.">
+<meta property="og:title" content="All repositories — 13 projects, sorted by what they prove">
+<meta property="og:description" content="Each card states the value first, then the status of the evidence behind it.">
+<meta property="og:url" content="https://jasonzheshiou.github.io/projects.html">
+<meta property="og:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<meta name="twitter:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<link rel="canonical" href="https://jasonzheshiou.github.io/projects.html">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<style>
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0 2rem}
+.filters button{font:500 12.5px/1 var(--mono);padding:.5rem .75rem;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
+.filters button[aria-pressed="true"]{border-color:var(--teal);color:var(--teal);background:var(--teal-bg)}
+.proves{font-size:13px;color:var(--muted);margin:0;padding-left:1.05rem}
+.proves li{margin-bottom:.25rem}
+.card .id{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.stat{font:500 11px/1 var(--mono);color:var(--muted)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
+  <nav class="main">
+    <a href="/research/findings.html">Findings</a>
+    <a href="/research/life-insurance-experience-bench.html">The Bench</a>
+    <a href="/ecosystem.html">Ecosystem</a>
+    <a href="/projects.html" aria-current="page">Projects</a>
+    <a href="/about.html">About</a>
+    <button class="theme-btn" type="button">☾</button>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<div class="wrap hero">
+  <p class="eyebrow">Repositories · 13 public</p>
+  <h1>Every repository, and what it is for</h1>
+  <p class="lede">Ordered by the layer of the ecosystem each one carries. Each card states the value first,
+  then the status of the evidence behind it — because a repository that cannot say which is which is a
+  portfolio, not a body of work. Language, last-push and license are read live from the GitHub API.</p>
+</div>
+
+<div class="wrap tight">
+  <div class="filters" role="group" aria-label="Filter by layer">
+    <button data-filter="all" aria-pressed="true">all · 13</button>
+    <button data-filter="l1" aria-pressed="false">L1 data</button>
+    <button data-filter="l2" aria-pressed="false">L2 measurement</button>
+    <button data-filter="l3" aria-pressed="false">L3 judgement</button>
+    <button data-filter="l4" aria-pressed="false">L4 governance</button>
+    <button data-filter="l5" aria-pressed="false">L5 operations</button>
+    <button data-filter="l6" aria-pressed="false">L6 craft</button>
+  </div>
+
+  <div class="cards">
+
+    <a class="card" data-layer="l2" data-repo="jasonzheshiou/Life_Insurance_Experience_Bench" href="/research/life-insurance-experience-bench.html">
+      <div class="id"><span class="id">L2 · Measurement</span><span class="chip teal">measured</span></div>
+      <h3>Life Insurance Experience Bench</h3>
+      <p>47 sealed A/E scenarios, two models crossed with two harnesses, strict scoring with false-alarm accounting. Where every number on this site comes from.</p>
+      <ul class="proves"><li>harness does not transfer</li><li>−30 pt optimism gap</li><li>cost changes the ranking</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-10</span><span class="stat" data-stat="license">MIT</span></div>
+    </a>
+
+    <a class="card" data-layer="l1" data-repo="jasonzheshiou/Synthetic_Life_Insurance_Data_Generator" href="https://github.com/jasonzheshiou/Synthetic_Life_Insurance_Data_Generator">
+      <div class="id"><span class="id">L1 · Data</span><span class="chip teal">verified</span></div>
+      <h3>Synthetic Life Insurance Data Generator</h3>
+      <p>Deterministic pure-Python Australian Death / CI / TPD / IP experience with A/E built in, and controls you plant deliberately — drift, shock, volatility, IP recovery.</p>
+      <ul class="proves"><li>bit-deterministic on seed 42</li><li>baseline A/E ≈ 1.0 by construction</li><li>CLI, Python API, Streamlit</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-08</span><span class="stat" data-stat="license">MIT</span></div>
+    </a>
+
+    <a class="card" data-layer="l4" data-repo="jasonzheshiou/Multi-Agents_Underwriter" href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter">
+      <div class="id"><span class="id">L4 · Governance</span><span class="chip teal">partly measured</span></div>
+      <h3>Multi-Agents Underwriter</h3>
+      <p>Medical, Financial and Compliance agents in structured debate over a deterministic rule engine, with escalation, JSONL audit logging and a chat surface for the underwriter.</p>
+      <ul class="proves"><li>0 % vs 0–47 % output variance</li><li>rules as versioned JSON</li><li>built with a local LLM</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-08</span><span class="stat" data-stat="license">MIT</span></div>
+    </a>
+
+    <a class="card" data-layer="l3" data-repo="jasonzheshiou/Life_Insurance_Experience_Analysis_Dashboard" href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Analysis_Dashboard">
+      <div class="id"><span class="id">L3 · Judgement</span><span class="chip">demonstrated</span></div>
+      <h3>Experience Analysis Dashboard</h3>
+      <p>Australia TPD incidence study: credibility, A/E, Mann-Kendall, GLM, random forest / GBM and MOB trees, in a modular Streamlit pipeline with audit trail and session persistence.</p>
+      <ul class="proves"><li>~200 000 exposure records</li><li>7 occupation classes, 7 diagnosis groups</li><li>20 authored development rules</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">HTML</span><span class="stat" data-stat="updated">2026-05</span><span class="stat" data-stat="license">MIT</span></div>
+    </a>
+
+    <a class="card" data-layer="l4" data-repo="jasonzheshiou/Standard_Inquirer" href="https://github.com/jasonzheshiou/Standard_Inquirer">
+      <div class="id"><span class="id">L4 · Governance</span><span class="chip">demonstrated</span></div>
+      <h3>Standard Inquirer</h3>
+      <p>Conversational compliance self-assessment against 40+ APRA prudential standards (CPS, LPS, LRS, CPG, LPG, Actuarial Standards) retrieved from a vector knowledge base.</p>
+      <ul class="proves"><li>adaptive questioning, not a static form</li><li>severity-ranked gap reports</li><li>three-phase answer extraction</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-05</span><span class="stat" data-stat="license">MIT</span></div>
+    </a>
+
+    <a class="card" data-layer="l5" data-repo="jasonzheshiou/LLM_Status_Watch" href="https://github.com/jasonzheshiou/LLM_Status_Watch">
+      <div class="id"><span class="id">L5 · Operations</span><span class="chip teal">in service</span></div>
+      <h3>LLM_Status_Watch</h3>
+      <p>A Raspberry Pi daemon that watches the local LLM server's Prometheus metrics and pushes your phone when it goes idle or stops answering. Nothing installed on the GPU host.</p>
+      <ul class="proves"><li>stdlib only, no jq, no pip</li><li>45 offline state-machine checks</li><li>the secret is the topic name</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-10</span><span class="stat" data-stat="license">MIT</span></div>
+    </a>
+
+    <a class="card" data-layer="l3" data-repo="jasonzheshiou/Data_Schema_analyser" href="https://github.com/jasonzheshiou/Data_Schema_analyser">
+      <div class="id"><span class="id">L3 · Plumbing</span><span class="chip">demonstrated</span></div>
+      <h3>Data Schema Analyser</h3>
+      <p>Upload data dictionaries and get join strategies, Graphviz ERDs and executable pandas from a natural-language brief, with EAV detection and pivoting handled automatically.</p>
+      <ul class="proves"><li>search by concept, not column name</li><li>many-to-many and dedup guidance</li><li>saveable sessions</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-04</span><span class="stat" data-stat="license">MIT</span></div>
+    </a>
+
+    <a class="card" data-layer="l3" data-repo="jasonzheshiou/Excel-AI-Automator" href="https://github.com/jasonzheshiou/Excel-AI-Automator">
+      <div class="id"><span class="id">L3 · Plumbing</span><span class="chip">demonstrated</span></div>
+      <h3>Excel-AI-Automator</h3>
+      <p>Natural language to a reviewable list of 19 Excel operations, executed step by step with visual status — and a rule-based offline mode when no model is available.</p>
+      <ul class="proves"><li>every step editable before execution</li><li>works with no LLM at all</li><li>manual builder fallback</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-05</span><span class="stat" data-stat="license">—</span></div>
+    </a>
+
+    <a class="card" data-layer="l6" data-repo="jasonzheshiou/Piticle_Life" href="https://github.com/jasonzheshiou/Piticle_Life">
+      <div class="id"><span class="id">L6 · Craft</span><span class="chip teal">pre-registered</span></div>
+      <h3>Piticle_Life</h3>
+      <p>A particle-life society of behavioural person-types running headless on a Raspberry Pi 2, watched from a loopback-only stdlib viewer. Questions written in <code>SPEC.md</code> before the sweeps.</p>
+      <ul class="proves"><li>48 runs, 2 of 3 claims failed their noise floor</li><li>139 tests</li><li>no LLM at runtime, ever</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-10</span><span class="stat" data-stat="license">—</span></div>
+    </a>
+
+    <a class="card" data-layer="l6" data-repo="jasonzheshiou/Pixel_Storybook" href="https://github.com/jasonzheshiou/Pixel_Storybook">
+      <div class="id"><span class="id">L6 · Craft</span><span class="chip">demonstrated</span></div>
+      <h3>Pixel_Storybook</h3>
+      <p>A local vision-language model paints pixel art by writing code that places pixels, looks at the render, names what is wrong by coordinate and rewrites the code. No diffusion.</p>
+      <ul class="proves"><li>per-pass scripts, plates, critique JSON</li><li>every model call logged</li><li>44 offline tests</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-10</span><span class="stat" data-stat="license">—</span></div>
+    </a>
+
+    <a class="card" data-layer="l6" data-repo="jasonzheshiou/little_games" href="https://github.com/jasonzheshiou/little_games">
+      <div class="id"><span class="id">L6 · Craft</span><span class="chip">self-contained</span></div>
+      <h3>little_games</h3>
+      <p>Two dependency-free browser games. The hard one generates pattern-reasoning boards from hidden rule sets where every wrong tile breaks exactly one rule.</p>
+      <ul class="proves"><li>uniqueness guaranteed by construction</li><li>seeded, replayable runs</li><li>difficulty changes the generator, not the score</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">HTML</span><span class="stat" data-stat="updated">2026-10</span><span class="stat" data-stat="license">—</span></div>
+    </a>
+
+    <a class="card" data-layer="l5" data-repo="jasonzheshiou/M365-Copilot-Agent-Loop" href="https://github.com/jasonzheshiou/M365-Copilot-Agent-Loop">
+      <div class="id"><span class="id">L5 · Concept</span><span class="chip">blueprint</span></div>
+      <h3>M365-Copilot-Agent-Loop</h3>
+      <p>Close an agentic coding loop through OneDrive sync: Copilot writes the script, a local watcher executes it, the execution log goes back into the chat for self-correction.</p>
+      <ul class="proves"><li>explicitly untested</li><li>written outside work hours, off company networks</li><li>open call for testers</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">Python</span><span class="stat" data-stat="updated">2026-06</span><span class="stat" data-stat="license">—</span></div>
+    </a>
+
+    <a class="card" data-layer="l6" data-repo="jasonzheshiou/jasonzheshiou" href="https://github.com/jasonzheshiou/jasonzheshiou">
+      <div class="id"><span class="id">meta</span><span class="chip">profile</span></div>
+      <h3>jasonzheshiou (profile)</h3>
+      <p>The profile README and the source of this site. Kept deliberately short — the argument lives in the repos.</p>
+      <ul class="proves"><li>this site is served from this repo</li></ul>
+      <div class="row"><span class="stat" data-stat="lang">—</span><span class="stat" data-stat="updated">2026-10</span><span class="stat" data-stat="license">—</span></div>
+    </a>
+
+  </div>
+  <p class="small muted" style="margin-top:1.5rem">If a stat above shows a dash, either the API request was
+  blocked or the repository has no license file yet. The repositories' own pages are the authority.</p>
+</div>
+
+</main>
+
+<footer class="site"><div class="wrap cols">
+  <div><h4>About this site</h4>
+    <p class="small muted">Jason Ou — FIAA, senior data scientist and analytic actuary. Open-source
+    life-insurance data tools, benchmarks and governance patterns for actuarial work with AI.</p></div>
+  <div><h4>Research</h4><ul>
+    <li><a href="/research/life-insurance-experience-bench.html">The A/E benchmark</a></li>
+    <li><a href="/research/findings.html">Findings ledger</a></li>
+    <li><a href="/ecosystem.html">Ecosystem map</a></li></ul></div>
+  <div><h4>Elsewhere</h4><ul>
+    <li><a href="https://github.com/jasonzheshiou">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/zheshi-jason-ou-8780203a">LinkedIn</a></li>
+    <li><a href="/projects.html">All repositories</a></li></ul></div>
+</div><div class="wrap fine">
+  <span>No analytics, no third-party scripts beyond the font stylesheet.</span>
+  <span class="prov">© 2026 Jason Ou · content MIT-licensed</span>
+</div></footer>
+</body>
+</html>

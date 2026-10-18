@@ -4,6 +4,28 @@
 
 > 12+ years transforming complex data into actionable insights for the insurance and financial services sectors.
 
+**🌐 Site:** <https://jasonzheshiou.github.io> — the research findings, and how these repositories interlock as one open actuarial AI ecosystem.
+
+---
+
+## 🔬 The research, first
+
+**[Life Insurance Experience Bench](https://github.com/jasonzheshiou/Life_Insurance_Experience_Bench)** —
+47 sealed synthetic portfolios (250 000 policies each, Death / CI / TPD / IP), two Qwen 27B models crossed with
+two harnesses, scored strict on a held-out split with false alarms counted.
+
+| measured | result |
+|---|---|
+| strict accuracy (best cell) | **71.2 %** — 79 hits / 111 units |
+| false alarms when it spoke | **41.9 %** (precision 58.1 %) |
+| does a harness transfer between models? | **no** — cross-loading cost 0.9 accuracy, 1.2 precision points |
+| tuning split → unseen books | **−32.1 / −28.6 points** for the two models |
+| cost of the same exam | 0.89 M tokens / 5.9 h vs **1.95 M / 21.9 h** |
+
+Data comes from [Synthetic_Life_Insurance_Data_Generator](https://github.com/jasonzheshiou/Synthetic_Life_Insurance_Data_Generator)
+(deterministic, seed 42, planted controls on actuals only). Findings and provenance:
+<https://jasonzheshiou.github.io/research/findings.html>.
+
 ---
 
 ## About Me
@@ -107,3 +129,29 @@ Beyond the day job, I'm passionate about **AI cooperation** - building tools whe
 <p align="center">
   <em>"Turning data into decisions, one insight at a time."</em>
 </p>
+
+---
+
+## 🌐 This repository also serves the site
+
+`jasonzheshiou.github.io` is built from the root of this repository: six hand-authored pages, plain HTML/CSS/JS,
+**no build step, no dependencies, no analytics** — charts are hand-drawn SVG plotted from the benchmark's
+published CSVs.
+
+```
+index.html                              the front door
+research/life-insurance-experience-bench.html   the flagship write-up
+research/findings.html                  eight measured findings
+ecosystem.html                          how the 13 repos interlock
+projects.html · about.html · 404.html
+assets/                                 site.css · site.js · charts.js · favicon.svg
+```
+
+Preview locally, then push to `main`:
+
+```bash
+python3 -m http.server 8080       # then open http://127.0.0.1:8080
+```
+
+Settings → Pages → **Source: main branch, root folder**. Everything is MIT-licensed; every figure on the site
+names the file and commit it came from.

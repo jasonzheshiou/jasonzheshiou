@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>About — Jason Ou, FIAA · actuarial data science and governed AI</title>
+<meta name="description" content="Jason Ou, Fellow of the Actuaries Institute: thirteen years in life insurance and financial services, predictive underwriting, experience analysis, and open, inspectable AI tooling for actuarial work.">
+<meta property="og:title" content="Jason Ou, FIAA — actuarial data science and governed AI">
+<meta property="og:description" content="Thirteen years in life insurance. Fellow of the Actuaries Institute. Building open, inspectable tools for actuarial work with AI.">
+<meta property="og:url" content="https://jasonzheshiou.github.io/about.html">
+<meta property="og:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<meta name="twitter:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<link rel="canonical" href="https://jasonzheshiou.github.io/about.html">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Jason Ou","jobTitle":"Senior Data Scientist and Strategic Analytic Actuary (FIAA)",
+"url":"https://jasonzheshiou.github.io/","sameAs":["https://github.com/jasonzheshiou","https://www.linkedin.com/in/zheshi-jason-ou-8780203a"],
+"knowsAbout":["Actuarial science","Life insurance experience analysis","Predictive underwriting","Machine learning governance","Synthetic data","Large language models"],
+"hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"professional","name":"Fellow of the Institute of Actuaries of Australia","recognizedBy":{"name":"Actuaries Institute"},"dateCreated":"2021-12"},
+"worksFor":[{"@type":"Organization","name":"Pacific Life Re","jobTitle":"Senior Data Scientist / Strategic Analytic Actuary (FIAA)","startDate":"2025-06"}]}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
+  <nav class="main">
+    <a href="/research/findings.html">Findings</a>
+    <a href="/research/life-insurance-experience-bench.html">The Bench</a>
+    <a href="/ecosystem.html">Ecosystem</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/about.html" aria-current="page">About</a>
+    <button class="theme-btn" type="button">☾</button>
+  </nav>
+</div></header>
+
+<main id="main">
+
+<div class="wrap hero">
+  <p class="eyebrow">About</p>
+  <h1>Actuary first, engineer second, sceptic throughout</h1>
+  <p class="lede">I am a Fellow of the Institute of Actuaries of Australia working as a senior data scientist
+  in life reinsurance, with thirteen years in insurance and financial services behind me. This site collects
+  the open work: a data generator, a benchmark built on it, and the governance patterns that fall out of both.</p>
+  <div class="hero-meta">
+    <span class="chip"><b>FIAA</b> credential 19258</span>
+    <span class="chip">Sydney, NSW</span>
+    <span class="chip">Python · SQL · pandas · Streamlit · Power BI</span>
+  </div>
+  <div class="btn-row">
+    <a class="btn" href="/research/life-insurance-experience-bench.html">Read the research</a>
+    <a class="btn ghost" href="mailto:ouzheshi@gmail.com">Email</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/zheshi-jason-ou-8780203a">LinkedIn</a>
+  </div>
+</div>
+
+<div class="wrap band"><div class="split-32"><article class="prose">
+
+<h2 id="thesis">What I am actually trying to do</h2>
+<p>Insurance is a profession that already audits itself: experience studies, mortality investigations,
+reserve adequacy, a signed opinion at the end of it. Machine learning enters that profession carrying a
+promise — pattern recognition at portfolio scale — and a problem: nobody can sign what they cannot inspect.</p>
+<p>So the work here is aimed at one narrow question: <strong>what would have to be true for an actuarial AI
+system to be governable?</strong> The answer I keep arriving at is that three things are non-negotiable — a
+ground truth you generate rather than curate, a scorer that counts false alarms, and a byte-exact record of
+the instrument behind every claim. Everything on this site exists to demonstrate those three things, or to
+supply a component of them.</p>
+
+<h2 id="practice">Practice</h2>
+<div class="tablewrap"><table class="tbl">
+<caption>Experience<span>Employment history as published on the GitHub profile.</span></caption>
+<thead><tr><th>role</th><th>where</th><th>when</th><th>what it involved</th></tr></thead>
+<tbody>
+<tr><td><b>Senior Data Scientist /<br>Strategic Analytic Actuary</b><br><span class="tag">FIAA</span></td><td>Pacific Life Re<br><small class="muted">Sydney</small></td><td class="n">Jun 2025 –</td>
+<td>Productionised a machine-learning solution for predictive underwriting that lifted stay-the-surface outcomes while holding portfolio risk, with application-level decisioning across a multi-benefit suite. Full modelling lifecycle: data processing, time-based out-of-time validation, feature selection and tuning, threshold optimisation against business risk tolerances. Deployment packaging and JSON I/O conventions with engineering; governance and approvals across underwriting, pricing, technology, risk, model risk, legal/privacy and information security, with monitoring plans. Adviser and portfolio analytics in Streamlit.</td></tr>
+<tr><td><b>Data Scientist / Actuary</b><br><span class="tag">FIAA</span></td><td>Resolution Life Australasia<br><small class="muted">Sydney</small></td><td class="n">Apr 2020 – Jun 2025</td>
+<td>Integrated large, awkward datasets across actuarial, finance, IT and claims with SQL and Python, cutting a reporting cycle from days to hours. Power BI and Excel reporting that improved a critical business KPI by 20 % in 2024; monthly performance papers to CEO, CFO and external auditors; VBA and Python automation endorsed by senior leadership for new performance metrics.</td></tr>
+<tr><td><b>Data Analyst / Actuarial Analyst</b></td><td>Zurich Financial Services Australia<br><small class="muted">Sydney</small></td><td class="n">May 2013 – Apr 2020</td>
+<td>Financial models integrating multiple sources for risk assessment and forecasting; automation of multi-million-dollar monthly processing, a 60 % efficiency gain; compliance and data-integration work with actuarial, finance and legal teams. Python, SQL, VBA and Power BI learned on the job rather than at university.</td></tr>
+</tbody></table></div>
+<p class="small muted">The pattern in that table is the reason for the open work: the wins were never model wins.
+They were wins from getting data integrated, evidence assembled and a non-technical audience able to follow the
+reasoning — which is exactly what an AI system has to be able to do, or it does not get deployed.</p>
+
+<h2 id="principles">Five things I hold to, and where you can check them</h2>
+<div class="cards">
+  <div class="card"><span class="id">01</span><h3>Ground truth gets generated, not curated</h3>
+    <p>A curated answer key drifts and cannot be regenerated when you extend the test. 47 scenarios, seed 42,
+    pinned generator commit, sealed manifests.</p>
+    <div class="row"><a class="small" href="https://github.com/jasonzheshiou/Synthetic_Life_Insurance_Data_Generator">generator</a><a class="small" href="/research/life-insurance-experience-bench.html">bench</a></div></div>
+  <div class="card"><span class="id">02</span><h3>Report the false alarms, and the cost</h3>
+    <p>Accuracy can be bought by talking more. Every result here carries precision and per-answer tokens and
+    wall time in the same row, not in an appendix.</p>
+    <div class="row"><a class="small" href="/research/findings.html">findings ledger</a></div></div>
+  <div class="card"><span class="id">03</span><h3>Receipts over claims</h3>
+    <p>Frozen harness snapshots, decision logs in JSONL, per-pass manifests, an experiment index that records
+    the fixes deliberately not applied.</p>
+    <div class="row"><a class="small" href="https://github.com/jasonzheshiou/Pixel_Storybook">Pixel_Storybook</a><a class="small" href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter">underwriter</a></div></div>
+  <div class="card"><span class="id">04</span><h3>Humans keep the accountability</h3>
+    <p>Agents propose, analyse and explain; a named actuary or underwriter decides. Escalation, thresholds and
+    permissions are structural, not prompt wording.</p>
+    <div class="row"><a class="small" href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter">design principles</a></div></div>
+  <div class="card"><span class="id">05</span><h3>Open is a governance choice</h3>
+    <p>The tools that decide which risks are acceptable should be readable by auditors, regulators and the
+    profession. Closed-source underwriting engines are a black box.</p>
+    <div class="row"><a class="small" href="/ecosystem.html">ecosystem</a></div></div>
+</div>
+
+<h2 id="now">Currently</h2>
+<ul>
+  <li><strong>Extending the benchmark's surface.</strong> Claims A/E was the first surface, not the limit.
+  Lapse and persistency, expense A/E, and morbidity need new scenario families and a new section of
+  <code>stats_pack.py</code> — not a new benchmark.</li>
+  <li><strong>A fresh held-out exam.</strong> The published held-out split is spent, so the next number needs
+  unseen scenarios with fresh controls.</li>
+  <li><strong>A real jail for tool calls.</strong> The current sandbox is advisory: rlimits or a container with
+  <span class="mono">--network none</span>, a read-only data mount, write-only output.</li>
+  <li><strong>Turning the dashboard and the underwriter into scorable subjects</strong> using the bench's
+  harness, so their claims sit at the same evidentiary standard.</li>
+</ul>
+
+<h2 id="elsewhere">Contact</h2>
+<p>Email is the reliable route: <a href="mailto:ouzheshi@gmail.com">ouzheshi@gmail.com</a>.
+For corrections to the underwriting logic, the compliance mappings or the scoring rubric, open an issue on the
+relevant repository — the decision record is in the repos' logs, so a disagreement can be argued against the
+evidence rather than against a summary of it.</p>
+
+</article><aside><div class="toc" role="navigation" aria-label="On this page">
+<h4 style="margin-top:0">On this page</h4>
+<a href="#thesis">What I am trying to do</a><br>
+<a href="#practice">Practice</a><br>
+<a href="#principles">Five things I hold to</a><br>
+<a href="#now">Currently</a><br>
+<a href="#elsewhere">Contact</a>
+</div></aside></div></div>
+
+</main>
+
+<footer class="site"><div class="wrap cols">
+  <div><h4>About this site</h4>
+    <p class="small muted">Jason Ou — FIAA, senior data scientist and analytic actuary. Open-source
+    life-insurance data tools, benchmarks and governance patterns for actuarial work with AI.</p></div>
+  <div><h4>Research</h4><ul>
+    <li><a href="/research/life-insurance-experience-bench.html">The A/E benchmark</a></li>
+    <li><a href="/research/findings.html">Findings ledger</a></li>
+    <li><a href="/ecosystem.html">Ecosystem map</a></li></ul></div>
+  <div><h4>Elsewhere</h4><ul>
+    <li><a href="https://github.com/jasonzheshiou">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/zheshi-jason-ou-8780203a">LinkedIn</a></li>
+    <li><a href="/projects.html">All repositories</a></li></ul></div>
+</div><div class="wrap fine">
+  <span>No analytics, no third-party scripts beyond the font stylesheet.</span>
+  <span class="prov">© 2026 Jason Ou · content MIT-licensed</span>
+</div></footer>
+</body>
+</html>
