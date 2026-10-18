@@ -115,8 +115,14 @@
       svg.appendChild(el("line", { x1: X(r.b), x2: X(r.a), y1: y, y2: y, stroke: "var(--line-2)", "stroke-width": 2 }));
       svg.appendChild(el("circle", { cx: X(r.a), cy: y, r: 6, fill: "var(--line-2)", stroke: "var(--line-2)", "class": "dot" }));
       svg.appendChild(el("circle", { cx: X(r.b), cy: y, r: 6, fill: "var(--teal)", stroke: "var(--teal)", "class": "dot" }));
-      svg.appendChild(txt(X(r.a) + 10, y + 4, "tuning " + r.a + "%", "lab"));
-      svg.appendChild(txt(X(r.b) - 10, y + 4, "held-out " + r.b + "%", "lab", { "text-anchor": "end" }));
+      var gap = X(r.a) - X(r.b);
+      if (gap > 170) {   /* room to sit the labels inside the bar */
+        svg.appendChild(txt(X(r.a) - 10, y + 4, "tuning " + r.a + "%", "lab", { "text-anchor": "end" }));
+        svg.appendChild(txt(X(r.b) + 10, y + 4, "held-out " + r.b + "%", "lab"));
+      } else {           /* otherwise stack them above each dot */
+        svg.appendChild(txt(X(r.a), y - 13, "tuning " + r.a + "%", "lab", { "text-anchor": "middle" }));
+        svg.appendChild(txt(X(r.b), y - 13, "held-out " + r.b + "%", "lab", { "text-anchor": "middle" }));
+      }
     });
     svg.setAttribute("viewBox", "0 0 " + W + " " + (top + s.rows.length * rowH + 18));
   }
