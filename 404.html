@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||"dark";if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
 <title>Not found · Jason Ou</title>
 <link rel="canonical" href="https://jasonzheshiou.github.io/404.html">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
 </head>
@@ -19,8 +19,10 @@
 <header class="top"><div class="wrap bar">
   <a class="brand" href="/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
   <nav class="main">
+    <a href="/">Home</a>
+    <a href="/research/life-insurance-experience-bench.html">A/E Bench</a>
+    <a href="/research/underwriting-output-variance.html">Variance</a>
     <a href="/research/findings.html">Findings</a>
-    <a href="/research/life-insurance-experience-bench.html">The Bench</a>
     <a href="/ecosystem.html">Ecosystem</a>
     <a href="/projects.html">Projects</a>
     <a href="/about.html">About</a>

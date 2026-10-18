@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||"dark";if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
 <title>Can a model read an experience study? — Life Insurance Experience Bench · Jason Ou</title>
 <meta name="description" content="A 47-scenario benchmark of synthetic life-insurance A/E experience data: two Qwen 27B models crossed with two harnesses, strict scoring, false-alarm accounting and cost. Findings, not architecture.">
 <meta property="og:type" content="article">
@@ -16,7 +16,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
 <script src="/assets/charts.js" defer></script>
@@ -27,8 +27,10 @@
 <header class="top"><div class="wrap bar">
   <a class="brand" href="/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
   <nav class="main">
+    <a href="/">Home</a>
+    <a href="/research/life-insurance-experience-bench.html" aria-current="page">A/E Bench</a>
+    <a href="/research/underwriting-output-variance.html">Variance</a>
     <a href="/research/findings.html">Findings</a>
-    <a href="/research/life-insurance-experience-bench.html" aria-current="page">The Bench</a>
     <a href="/ecosystem.html">Ecosystem</a>
     <a href="/projects.html">Projects</a>
     <a href="/about.html">About</a>
@@ -39,7 +41,7 @@
 <main id="main">
 
 <div class="wrap hero">
-  <p class="eyebrow">Research · Life insurance experience · measured 2026</p>
+  <p class="eyebrow">Study 01 · Life insurance experience · measured 2026</p>
   <h1>Can a model read an experience study?</h1>
   <p class="lede">Forty-seven synthetic portfolios — 250&nbsp;000 policies each, four benefit lines,
   with anomalies planted by a generator that keeps the answer key sealed. Two Qwen 27B models,
@@ -56,6 +58,7 @@
     <a class="btn" href="#results">Jump to the results</a>
     <a class="btn ghost" href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Bench">Repository</a>
     <a class="btn ghost" href="/research/findings.html">Findings ledger</a>
+    <a class="btn ghost" href="/research/underwriting-output-variance.html">Study 02: variance</a>
   </div>
 </div>
 
@@ -446,6 +449,36 @@ or experiment in a scratch clone.</p></div>
 <tr><td><em>left out, regenerable</em></td><td class="n">5.2 GB</td><td><code>data/raw/</code>, exposure and claims CSVs</td></tr>
 </tbody></table></div>
 
+<h2 id="learnings">What building it taught me</h2>
+<p>Five lessons that cost a rebuild each. They are the reason the harness, the scorer and the docs look the way
+they do — and they transfer to any measured AI task, not just this one.</p>
+<div class="flow">
+  <div class="step"><div class="n">1</div><p><b>Snapshot the harness before the first call, not after the
+  last.</b> Code <em>and</em> prompts are copied into <code>results/&lt;corpus&gt;/harness_snapshot/</code> at the
+  start of a campaign, because it is the only record of what was actually run. Numbers whose snapshot was not kept
+  are numbers nobody can re-derive.</p></div>
+  <div class="step"><div class="n">2</div><p><b>Two failure modes need two remedies.</b> Of 3.8's 69 false
+  alarms, 31 were pure invention; of 3.6's 50, only 6 were — its errors were almost all mislabels, the right line
+  with the wrong word. The vocabulary work that helped 3.6 was the wrong medicine for over-claiming, and the
+  attempts to make 3.6 report <em>less</em> simply did not work.</p></div>
+  <div class="step"><div class="n">3</div><p><b>Tune on a split you are willing to burn.</b> The tuning scores
+  were 95.5 % and 97.7 %; the held-out scores 63.4 % and 69.1 %. The split is spent now and cannot be reused —
+  which is the correct price, and the reason the next exam needs fresh scenarios.</p></div>
+  <div class="step"><div class="n">4</div><p><b>A documented defect is more valuable than a silently patched
+  one.</b> The run that never completed under one configuration is recorded with its three concurrent causes and
+  the repair was <em>declined</em>, so the number stays auditable; the parse fix that genuinely changed nothing was
+  applied and labelled. Two units that are statistically unidentifiable are flagged as benchmark artefacts, not
+  scored as model failures.</p></div>
+  <div class="step"><div class="n">5</div><p><b>Cost is a first-class result.</b> The two headline campaigns
+  differ by 5.4 accuracy points and by 2.2× the tokens and 3.7× the wall clock, on one shared local server. With
+  the cost column removed, the ranking would have been wrong for anyone with a queue.</p></div>
+</div>
+<div class="note"><h4>Governance controls this benchmark provides</h4>
+<p>Sealed truth per scenario so answers cannot leak into prompts; per-pass manifests that make each published
+figure re-derivable; a scorer that counts false alarms rather than rewarding volume; frozen harness bytes stored
+beside the results; and an explicit statement of what the numbers do <em>not</em> support — no production claim,
+no real portfolio, no substitute for an actuary's judgement.</p></div>
+
 <h2 id="so-what">What this changes about how the rest is built</h2>
 <p>The finding that earns its keep is not a score, it is a governance rule: <strong>after any model change,
 re-measure the model-and-harness pair and re-tune on recorded evidence.</strong> Behaviour moves when a model
@@ -493,6 +526,7 @@ limit: adding lapse, expense or reserve A/E means a new scenario family and a ne
 <a href="#failure">The recorded failure</a><br>
 <a href="#limits">Limitations</a><br>
 <a href="#reproduce">Replicating it</a><br>
+<a href="#learnings">What building it taught me</a><br>
 <a href="#so-what">Why it changes everything else</a>
 </div>
 </aside>
@@ -508,6 +542,7 @@ limit: adding lapse, expense or reserve A/E means a new scenario family and a ne
   </div>
   <div><h4>Research</h4><ul>
     <li><a href="/research/life-insurance-experience-bench.html">The A/E benchmark</a></li>
+    <li><a href="/research/underwriting-output-variance.html">Output-variance study</a></li>
     <li><a href="/research/findings.html">Findings ledger</a></li>
     <li><a href="/ecosystem.html">Ecosystem map</a></li>
   </ul></div>

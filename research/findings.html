@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||"dark";if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
 <title>Findings ledger — what the measurements actually say · Jason Ou</title>
 <meta name="description" content="Eight measured findings from the life-insurance A/E benchmark and its neighbouring repositories: harness transfer, the optimism gap, over-claiming versus mislabelling, identifiability, and output variance in underwriting.">
 <meta property="og:title" content="Findings ledger — measured results from the actuarial AI ecosystem">
@@ -15,7 +15,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
 </head>
@@ -25,8 +25,10 @@
 <header class="top"><div class="wrap bar">
   <a class="brand" href="/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
   <nav class="main">
+    <a href="/">Home</a>
+    <a href="/research/life-insurance-experience-bench.html">A/E Bench</a>
+    <a href="/research/underwriting-output-variance.html">Variance</a>
     <a href="/research/findings.html" aria-current="page">Findings</a>
-    <a href="/research/life-insurance-experience-bench.html">The Bench</a>
     <a href="/ecosystem.html">Ecosystem</a>
     <a href="/projects.html">Projects</a>
     <a href="/about.html">About</a>
@@ -39,9 +41,10 @@
 <div class="wrap hero">
   <p class="eyebrow">Research · Findings</p>
   <h1>The ledger, not the brochure</h1>
-  <p class="lede">Eight findings that came out of the measurements rather than being asserted before them.
-  Each one states the number, what it changes in practice, and the file it came from — so a reader can argue
-  with the evidence instead of with a summary of it.</p>
+  <p class="lede">Eight findings from the A/E benchmark, and five from the underwriting output-variance study —
+  all of them produced by measurements rather than asserted before them. Each states the number, what it changes
+  in practice, and the file it came from, so a reader can argue with the evidence instead of with a summary of
+  it.</p>
   <div class="hero-meta">
     <span class="chip">2 models × 2 harnesses</span>
     <span class="chip">23–24 held-out books × 3 runs</span>
@@ -161,18 +164,40 @@ overdispersed line.</p></div>
   snapshot and the prompt that produced it.</p></div>
 </div>
 
+<h2 id="study02">The other study: five findings on output variance</h2>
+<p>The benchmark asks whether a model is <em>right</em>. The second study asks the question a regulator asks
+first: is it the <em>same model twice</em>? Repeated-invocation testing of the multi-agent underwriter — the
+same applicant run through the LLM path about a hundred times, Wilson intervals on every proportion. Full
+write-up: <a href="/research/underwriting-output-variance.html">output variance in LLM underwriting</a>.</p>
+<div class="flow">
+  <div class="step"><div class="n">1</div><p><b>Variance concentrates at the decision boundary, not across the
+  book.</b> Medical agent spread: <span class="num">0 %</span> healthy → <span class="num">26 %</span>
+  borderline → <span class="num">42 %</span> high-risk; a separate 50-run session put the widest evidence path
+  at a <span class="num">47 %</span> spread. Uncertainty that clusters on hard cases is predictable, which makes
+  it routable — route by distance from the threshold, not by case type.</p></div>
+  <div class="step"><div class="n">2</div><p><b>Temperature is a decision control, not a noise dial.</b> On the
+  high-risk profile T<span class="num">0.1</span> gave decline 58 % / loading 42 %; T<span class="num">0.0</span>
+  gave a flat <code>loading</code>. Zeroing the dial changed <em>which decision</em> the system makes, and
+  T<span class="num">0.1</span> — the production setting — is where the spread peaked.</p></div>
+  <div class="step"><div class="n">3</div><p><b>Architecture beat the model.</b> On the doubly-uncertain profile
+  the debate returned <code>loading</code> in <span class="num">100/100</span> runs while the Medical agent alone
+  varied ~<span class="num">20 %</span>. A most-conservative combine rule absorbed the variance — and bought
+  conservatism with it, which is a risk-appetite decision, not a free lunch.</p></div>
+  <div class="step"><div class="n">4</div><p><b>Failures are stochastic too.</b> Unparseable output fell back to
+  <code>refer</code> — safe, but the same input sometimes answered and sometimes fell back. Under parallel load
+  the reasoning model entered a thinking loop and returned nothing; sequential calls were clean. A fallback rate
+  and a concurrency limit belong in the decision distribution.</p></div>
+  <div class="step"><div class="n">5</div><p><b>The largest variance is the part you do not control.</b> Model
+  developers, inference providers and the deploying company each hold a dial — which is why even a hosted
+  T<span class="num">0</span> endpoint is rarely bit-reproducible. <em>The variance you measured is only valid for
+  the configuration you tested</em>: the same rule finding&nbsp;1 and finding&nbsp;2 forced, arrived at from an
+  entirely different direction.</p></div>
+</div>
+
 <h2 id="elsewhere">Findings outside the benchmark</h2>
 <p>The rest of the portfolio is not all measured to the same standard, and saying which parts are is part of
 the point.</p>
 <div class="cards">
-  <div class="card"><span class="id">Multi-Agents_Underwriter · measured</span>
-    <h3>Stochastic decisions can be bounded</h3>
-    <p>Deterministic rules path: <b>0 %</b> variance across repeat runs. LLM decision path:
-    <b>0–47 %</b>, concentrated on borderline cases. Changing temperature or seed shifts the decision, not
-    just the spread. A “highest-risk-wins” synthesis rule collapses end-to-end variance to
-    <b>0 %</b>.</p>
-    <div class="row"><span class="tag">tests/stability/</span><a href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter" class="small">repo</a></div></div>
-
   <div class="card"><span class="id">Piticle_Life · measured</span>
     <h3>Two of three claims died at their own noise floor</h3>
     <p>Questions were written into <code>SPEC.md</code> <b>before</b> the sweeps that answered them: 48 runs
@@ -220,6 +245,8 @@ the point.</p>
 <a href="#f6">6 · one family separates them</a><br>
 <a href="#f7">7 · not every miss is a miss</a><br>
 <a href="#f8">8 · tools go unused</a><br>
+<h4>Study 02</h4>
+<a href="#study02">Five variance findings</a><br>
 <h4>Context</h4>
 <a href="#growth">How the harness grew</a><br>
 <a href="#reading">How to read a number</a><br>
@@ -235,6 +262,7 @@ the point.</p>
     life-insurance data tools, benchmarks and governance patterns for actuarial work with AI.</p></div>
   <div><h4>Research</h4><ul>
     <li><a href="/research/life-insurance-experience-bench.html">The A/E benchmark</a></li>
+    <li><a href="/research/underwriting-output-variance.html">Output-variance study</a></li>
     <li><a href="/research/findings.html">Findings ledger</a></li>
     <li><a href="/ecosystem.html">Ecosystem map</a></li></ul></div>
   <div><h4>Elsewhere</h4><ul>

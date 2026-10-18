@@ -4,7 +4,7 @@
 
 > 12+ years transforming complex data into actionable insights for the insurance and financial services sectors.
 
-**🌐 Site:** <https://jasonzheshiou.github.io> — the research findings, and how these repositories interlock as one open actuarial AI ecosystem.
+**🌐 Site:** <https://jasonzheshiou.github.io> — who I am, two measured studies, and how these repositories interlock as one open actuarial AI ecosystem.
 
 ---
 
@@ -25,6 +25,23 @@ two harnesses, scored strict on a held-out split with false alarms counted.
 Data comes from [Synthetic_Life_Insurance_Data_Generator](https://github.com/jasonzheshiou/Synthetic_Life_Insurance_Data_Generator)
 (deterministic, seed 42, planted controls on actuals only). Findings and provenance:
 <https://jasonzheshiou.github.io/research/findings.html>.
+
+## 📐 The second study: output variance
+
+**[Multi-Agents_Underwriter](https://github.com/jasonzheshiou/Multi-Agents_Underwriter)** — the same applicant run
+through the LLM decision path ~100 times, with Wilson 95 % intervals on every proportion. Measured on
+Qwen3.6-35B-A3B (local, temperature 0.1); synthetic applicants, no ground truth, so this measures **consistency,
+not accuracy**.
+
+| measured | result |
+|---|---|
+| deterministic rule path | **0 %** variance across 600 runs |
+| LLM path, clear → borderline cases | **0 % → 26 % → 42 %** (widest evidence path 47 %) |
+| temperature 0.1 → 0.0 | changed the **decision** (decline 58 % / loading 42 % → flat loading) |
+| debate + most-conservative combine | **100/100** identical, absorbing a ~20 % agent variance |
+
+Findings, method and governance asks:
+<https://jasonzheshiou.github.io/research/underwriting-output-variance.html>.
 
 ---
 

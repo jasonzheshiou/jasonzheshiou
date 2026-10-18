@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||"dark";if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
 <title>About — Jason Ou, FIAA · actuarial data science and governed AI</title>
 <meta name="description" content="Jason Ou, Fellow of the Actuaries Institute: thirteen years in life insurance and financial services, predictive underwriting, experience analysis, and open, inspectable AI tooling for actuarial work.">
 <meta property="og:title" content="Jason Ou, FIAA — actuarial data science and governed AI">
@@ -15,7 +15,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
 <script type="application/ld+json">
@@ -32,8 +32,10 @@
 <header class="top"><div class="wrap bar">
   <a class="brand" href="/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
   <nav class="main">
+    <a href="/">Home</a>
+    <a href="/research/life-insurance-experience-bench.html">A/E Bench</a>
+    <a href="/research/underwriting-output-variance.html">Variance</a>
     <a href="/research/findings.html">Findings</a>
-    <a href="/research/life-insurance-experience-bench.html">The Bench</a>
     <a href="/ecosystem.html">Ecosystem</a>
     <a href="/projects.html">Projects</a>
     <a href="/about.html" aria-current="page">About</a>
@@ -62,6 +64,32 @@
 </div>
 
 <div class="wrap band"><div class="split-32"><article class="prose">
+
+<h2 id="who">Who I am, plainly</h2>
+<p>I came up through the unglamorous end of the industry. I started at Zurich in 2013 as an actuarial analyst
+writing VBA, learned Python and SQL on the job rather than at university, and spent seven years integrating
+datasets that had been left inside other people's systems. Resolution Life was five more years of monthly
+performance papers to a CEO, a CFO and external auditors — a fast education in the difference between an
+impressive analysis and one that survives a question from someone whose job is to disbelieve it. I became a
+Fellow of the Actuaries Institute in 2021, and I am now a senior data scientist in life reinsurance at Pacific
+Life Re, where the work is productionised predictive underwriting: out-of-time validation, threshold
+optimisation against a stated risk tolerance, and approvals from underwriting, pricing, risk, model risk, legal
+and information security.</p>
+<p>That route left me with an awkward combination for the rooms I usually sit in. I can build the pipeline, tune
+the model and argue about feature selection; I can also tell you which paragraph of a prudential standard the
+result has to satisfy, and what an auditor will ask for at 4pm on a Friday. When large language models got good
+enough to read an experience study, that combination turned into a question I could not leave alone:
+<em>what would have to be true before one of these could be pointed at a decision I might have to
+sign?</em></p>
+<p>The honest answer is that most of what is published about AI in insurance is a demonstration wearing the
+clothes of evidence. So I build the missing parts — data with a known answer, benchmarks that count mistakes,
+engines that log what they decided — and I publish the failures alongside the results, because the failures are
+where the governance actually lives.</p>
+<p>What I am like to work with: I will ask for the denominator before the headline, I would rather scope a thing
+small and finish it than propose it well, and I am more useful in the morning than in a committee. The side
+projects are the tell — a Raspberry Pi running a particle-life society, a pixel-art generator that critiques its
+own output, two browser games with no dependencies — because they all obey the same rule the insurance work
+does: pre-register the question, publish the noise floor, keep the receipts.</p>
 
 <h2 id="thesis">What I am actually trying to do</h2>
 <p>Insurance is a profession that already audits itself: experience studies, mortality investigations,
@@ -134,6 +162,7 @@ evidence rather than against a summary of it.</p>
 
 </article><aside><div class="toc" role="navigation" aria-label="On this page">
 <h4 style="margin-top:0">On this page</h4>
+<a href="#who">Who I am, plainly</a><br>
 <a href="#thesis">What I am trying to do</a><br>
 <a href="#practice">Practice</a><br>
 <a href="#principles">Five things I hold to</a><br>
@@ -149,6 +178,7 @@ evidence rather than against a summary of it.</p>
     life-insurance data tools, benchmarks and governance patterns for actuarial work with AI.</p></div>
   <div><h4>Research</h4><ul>
     <li><a href="/research/life-insurance-experience-bench.html">The A/E benchmark</a></li>
+    <li><a href="/research/underwriting-output-variance.html">Output-variance study</a></li>
     <li><a href="/research/findings.html">Findings ledger</a></li>
     <li><a href="/ecosystem.html">Ecosystem map</a></li></ul></div>
   <div><h4>Elsewhere</h4><ul>

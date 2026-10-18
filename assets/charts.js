@@ -32,9 +32,12 @@
       if (s.band.label)
         svg.appendChild(txt(X(i0) + (X(i1) - X(i0)) / 2, M.t + 11, s.band.label, "anno", { "text-anchor": "middle" }));
     }
+    var tickLabel = s.unit === "%" ? function (t) { return t + "%"; }
+                  : s.unit ? function (t) { return t + s.unit; }
+                  : function (t) { return t.toFixed(2); };
     (s.ticks || []).forEach(function (t) {
       svg.appendChild(el("line", { "class": t === s.ref ? "zero" : "grid", x1: M.l, x2: W - M.r, y1: Y(t), y2: Y(t) }));
-      svg.appendChild(txt(M.l - 8, Y(t) + 3.5, t.toFixed(2), "tick", { "text-anchor": "end" }));
+      svg.appendChild(txt(M.l - 8, Y(t) + 3.5, tickLabel(t), "tick", { "text-anchor": "end" }));
     });
     xs.forEach(function (lab, i) {
       if (s.every && i % s.every !== 0) return;
@@ -89,9 +92,9 @@
       svg.appendChild(txt(M.l, y0 + 12, r.label, "anno"));
       var wa = r.a / maxA * (iw - 190), wb = r.b / maxB * (iw - 190);
       svg.appendChild(el("rect", { x: M.l, y: y0 + 20, width: Math.max(2, wa), height: 13, rx: 3, fill: "var(--teal)" }));
-      svg.appendChild(txt(M.l + wa + 8, y0 + 31, r.a.toFixed(2) + " " + (s.aFmt || ""), "lab"));
+      svg.appendChild(txt(M.l + wa + 8, y0 + 31, r.a.toFixed(s.aDec == null ? 2 : s.aDec) + " " + (s.aFmt || ""), "lab"));
       svg.appendChild(el("rect", { x: M.l, y: y0 + 38, width: Math.max(2, wb), height: 13, rx: 3, fill: "var(--amber)" }));
-      svg.appendChild(txt(M.l + wb + 8, y0 + 49, r.b.toFixed(1) + " " + (s.bFmt || ""), "lab"));
+      svg.appendChild(txt(M.l + wb + 8, y0 + 49, r.b.toFixed(s.bDec == null ? 1 : s.bDec) + " " + (s.bFmt || ""), "lab"));
     });
     svg.setAttribute("viewBox", "0 0 " + W + " " + (top + s.rows.length * rowH + 8));
     svg.style.marginBottom = "-14px";
@@ -118,7 +121,23 @@
     svg.setAttribute("viewBox", "0 0 " + W + " " + (top + s.rows.length * rowH + 18));
   }
 
-  var KIND = { lines: lines, scatter: scatter, paired: paired, dumbbell: dumbbell };
+  /* ---- horizontal bars: one measure, categorical ---- */
+  function hbars(svg, s) {
+    var rowH = 46, top = 18, iw = W - M.l - M.r;
+    var max = s.max || Math.max.apply(null, s.rows.map(function (r) { return r.value; }));
+    s.rows.forEach(function (r, i) {
+      var y = top + i * rowH;
+      svg.appendChild(txt(M.l, y + 11, r.label, "anno"));
+      if (r.note) svg.appendChild(txt(W - M.r, y + 11, r.note, "lab", { "text-anchor": "end" }));
+      var w = Math.max(2, r.value / max * (iw - 110));
+      svg.appendChild(el("rect", { x: M.l, y: y + 18, width: iw, height: 11, rx: 0, fill: "var(--line)", opacity: ".45" }));
+      svg.appendChild(el("rect", { x: M.l, y: y + 18, width: w, height: 11, fill: r.cls === "warn" ? "var(--amber)" : r.cls === "bad" ? "var(--red)" : "var(--cyan)" }));
+      svg.appendChild(txt(M.l + w + 9, y + 28, (r.value.toFixed(r.dec == null ? 1 : r.dec)) + (s.unit || ""), "anno"));
+    });
+    svg.setAttribute("viewBox", "0 0 " + W + " " + (top + s.rows.length * rowH + 10));
+  }
+
+  var KIND = { lines: lines, scatter: scatter, paired: paired, dumbbell: dumbbell, hbars: hbars };
   var boxes = document.querySelectorAll("[data-chart]");
   for (var i = 0; i < boxes.length; i++) {
     var box = boxes[i];
@@ -126,7 +145,7 @@
     try { spec = JSON.parse(box.getAttribute("data-spec")); } catch (e) { continue; }
     try {
       var svg = el("svg", {
-        "class": "chart", viewBox: "0 0 " + W + " " + (spec.kind === "paired" ? 150 : H),
+        "class": "chart", viewBox: "0 0 " + W + " " + ((spec.kind === "paired" || spec.kind === "hbars") ? 150 : H),
         role: "img", "aria-label": spec.aria || ""
       });
       (KIND[spec.kind] || lines)(svg, spec);

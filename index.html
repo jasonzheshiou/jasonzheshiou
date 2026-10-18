@@ -1,41 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
-<title>Jason Ou, FIAA — an open Actuarial AI ecosystem, measured</title>
-<meta name="description" content="Open-source life-insurance data tools and a 47-scenario benchmark of LLMs on A/E experience analysis. Findings: a harness that does not transfer, a 30-point optimism gap, and cost beside every score.">
+<script>try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("theme")||"dark";if(q){try{localStorage.setItem("theme",q)}catch(e){}}document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>Jason Ou — FIAA actuary building inspectable AI for life insurance</title>
+<meta name="description" content="Jason Ou, Fellow of the Actuaries Institute (FIAA), Sydney. Thirteen years in life insurance; two measured studies of LLMs in actuarial work — an A/E experience benchmark and an underwriting output-variance study — and the open tools around them.">
 <meta property="og:type" content="profile">
-<meta property="og:title" content="Jason Ou, FIAA — an open Actuarial AI ecosystem, measured">
-<meta property="og:description" content="Forty-seven synthetic life-insurance portfolios, two models, two harnesses, receipts for everything.">
+<meta property="og:title" content="Jason Ou — FIAA actuary building inspectable AI for life insurance">
+<meta property="og:description" content="Two measured studies, thirteen repositories, one thesis: an AI decision in insurance has to be inspectable before it can be signed.">
 <meta property="og:url" content="https://jasonzheshiou.github.io/">
 <meta property="og:image" content="https://jasonzheshiou.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://jasonzheshiou.github.io/assets/og.png">
-<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://jasonzheshiou.github.io/">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
-<script src="/assets/charts.js" defer></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Jason Ou","jobTitle":"Senior Data Scientist and Strategic Analytic Actuary (FIAA)","url":"https://jasonzheshiou.github.io/","sameAs":["https://github.com/jasonzheshiou","https://www.linkedin.com/in/zheshi-jason-ou-8780203a"]}
+{"@context":"https://schema.org","@type":"Person","name":"Jason Ou","jobTitle":"Senior Data Scientist and Strategic Analytic Actuary (FIAA)","url":"https://jasonzheshiou.github.io/","sameAs":["https://github.com/jasonzheshiou","https://www.linkedin.com/in/zheshi-jason-ou-8780203a"],
+"hasCredential":{"@context":"https://schema.org","@type":"EducationalOccupationalCredential","credentialCategory":"Fellow of the Institute of Actuaries of Australia (FIAA)","recognizedBy":{"name":"Actuaries Institute"},"dateCreated":"2021-12"}}
 </script>
 <style>
 .hero{position:relative;overflow:hidden}
-.hero-line{position:absolute;right:0;top:14%;width:min(48%,540px);height:auto;opacity:.15;pointer-events:none}
-.hero-line polyline{fill:none;stroke:var(--teal);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
-.hero-line .flat{stroke:var(--muted);stroke-width:1.5}
-@media (max-width: 860px){ .hero-line{opacity:.09;top:auto;bottom:2rem} }
-.q{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.q div{border-top:2px solid var(--teal);padding-top:.8rem}
-.q b{display:block;font-family:var(--serif);font-size:1.05rem;margin-bottom:.3rem}
-.q p{margin:0;font-size:14px;color:var(--muted)}
-.q span{font:500 11px/1 var(--mono);color:var(--muted);letter-spacing:.1em}
-.dens{display:flex;flex-wrap:wrap;gap:.6rem;margin:.4rem 0 0}
+.hero-line{position:absolute;right:0;top:9%;width:min(46%,540px);opacity:.16;pointer-events:none;filter:drop-shadow(0 0 12px rgba(53,214,255,.55))}
+.hero-line polyline{fill:none;stroke:var(--cyan);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round}
+.hero-line .base{stroke:var(--violet);stroke-width:1.1;opacity:.7;stroke-dasharray:4 5}
+@media (max-width:900px){ .hero-line{top:auto;bottom:1rem;opacity:.09} }
+.study{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2rem}
+@media (min-width:900px){ .study{grid-template-columns:1fr 1fr} }
+.study > a{background:var(--panel-2);padding:1.35rem 1.4rem 1.45rem;text-decoration:none;color:inherit;display:block}
+.study > a:hover{background:var(--cyan-bg)}
+.study .k{font:500 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+.study h3{margin:.7rem 0 .35rem;font-size:1.32rem}
+.study p{margin:0;color:var(--muted);font-size:14.4px}
+.study .nums{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line)}
+.study .nums b{display:block;font:500 1.5rem/1 var(--mono);color:var(--cyan);text-shadow:var(--glow)}
+.study .nums span{font:400 11.5px/1.4 var(--mono);color:var(--dim)}
+.lessons{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);grid-template-columns:repeat(auto-fit,minmax(258px,1fr));margin-top:2rem}
+.lessons > div{background:var(--panel-2);padding:1rem 1.05rem 1.1rem}
+.lessons b{display:block;font-family:var(--disp);font-size:.99rem;margin:.4rem 0 .3rem}
+.lessons p{margin:0;font-size:13.4px;color:var(--muted)}
+.lessons .from{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.notclaimed{list-style:none;padding:0;margin:0;font-size:14px;color:var(--muted)}
+.notclaimed li{padding:.5rem 0;border-bottom:1px solid var(--line)}
+.notclaimed li:last-child{border-bottom:0}
+.notclaimed i{font-style:normal;color:var(--red);font-family:var(--mono);margin-right:.5rem}
+.building{list-style:none;padding:0;margin:0;font-size:14px;color:var(--muted)}
+.building li{position:relative;padding:.35rem 0 .35rem 1.1rem}
+.building li::before{content:"\25B8";position:absolute;left:0;color:var(--cyan);font-size:11px}
 </style>
 </head>
 <body>
@@ -44,8 +60,10 @@
 <header class="top"><div class="wrap bar">
   <a class="brand" href="/"><span class="mark">JO</span><span>Jason Ou<small>FIAA · Actuarial AI</small></span></a>
   <nav class="main">
+    <a href="/" aria-current="page">Home</a>
+    <a href="/research/life-insurance-experience-bench.html">A/E Bench</a>
+    <a href="/research/underwriting-output-variance.html">Variance</a>
     <a href="/research/findings.html">Findings</a>
-    <a href="/research/life-insurance-experience-bench.html">The Bench</a>
     <a href="/ecosystem.html">Ecosystem</a>
     <a href="/projects.html">Projects</a>
     <a href="/about.html">About</a>
@@ -57,173 +75,226 @@
 
 <section class="hero"><div class="wrap">
   <svg class="hero-line" viewBox="0 0 400 115" aria-hidden="true">
-    <polyline class="flat" points="0,52 44,50 89,58 133,47 178,50 222,50 267,57 311,48 356,51 400,49"/>
+    <polyline class="base" points="0,52 400,52"/>
     <polyline points="0,106 44,96 89,105 133,102 178,84 222,55 267,43 311,36 356,15 400,8"/>
   </svg>
-  <p class="eyebrow">Jason Ou · FIAA · Sydney</p>
-  <h1>An open Actuarial AI ecosystem, with the receipts attached.</h1>
-  <p class="lede">Most AI demos answer none of the four questions a governance committee asks. This body of
-  work answers all four — on synthetic life-insurance experience data, with a benchmark that publishes its own
-  failures.</p>
+
+  <div class="idcard">
+    <div class="who">Jason Ou <span>· FIAA · Sydney</span></div>
+    <dl>
+      <div><dt>Role</dt><dd>Senior Data Scientist / Analytic Actuary</dd></div>
+      <div><dt>Credential</dt><dd>FIAA · 19258</dd></div>
+      <div><dt>In the industry</dt><dd>since 2013</dd></div>
+      <div><dt>Status</dt><dd><span class="status">open to collaborate</span></dd></div>
+    </dl>
+  </div>
+
+  <p class="eyebrow">Actuary · data scientist · model governance</p>
+  <h1>I make AI decisions in insurance defensible.</h1>
+  <p class="lede">Thirteen years in life insurance and financial services, now a senior data scientist in life
+  reinsurance. My open work starts from one conviction: <strong>a decision an actuary cannot inspect is a
+  decision an actuary cannot sign.</strong> So I do not build demos. I build instruments — synthetic data with a
+  known answer key, benchmarks with honest scoring, and engines whose audit trail a regulator could actually
+  read.</p>
   <div class="hero-meta">
     <span class="chip"><b>13</b> public repositories</span>
-    <span class="chip"><b>47</b> sealed benchmark scenarios</span>
-    <span class="chip">local LLMs, <b>no</b> cloud dependency</span>
-    <span class="chip">MIT</span>
+    <span class="chip"><b>2</b> measured studies</span>
+    <span class="chip"><b>47</b> sealed scenarios</span>
+    <span class="chip">local LLMs · <b>no</b> cloud dependency</span>
+    <span class="chip">MIT licensed</span>
   </div>
   <div class="btn-row">
-    <a class="btn" href="/research/life-insurance-experience-bench.html">Read the benchmark findings</a>
-    <a class="btn ghost" href="/ecosystem.html">See how the repos connect</a>
+    <a class="btn" href="/projects.html">See the projects</a>
+    <a class="btn ghost" href="/about.html">More about me</a>
+    <a class="btn ghost" href="mailto:ouzheshi@gmail.com">ouzheshi@gmail.com</a>
   </div>
 </div></section>
 
 <section class="band tight"><div class="wrap">
+  <p class="eyebrow">Signal panel · every figure has a source</p>
   <div class="ledger">
-    <div class="metric"><div class="v">71.2<i>%</i></div><div class="k">strict accuracy, best cell</div>
-      <div class="s">Qwen3.8-27B, own harness, held-out — <a href="/research/life-insurance-experience-bench.html#results">how it was measured</a></div></div>
-    <div class="metric warn"><div class="v">41.9<i>%</i></div><div class="k">false alarms when it spoke</div>
-      <div class="s">79 hits vs 57 inventions in 136 claims</div></div>
-    <div class="metric bad"><div class="v">−30<i>pts</i></div><div class="k">optimism gap</div>
-      <div class="s">tuning split → unseen books, both models</div></div>
-    <div class="metric"><div class="v">3.4<i>×</i></div><div class="k">cost spread on one exam</div>
-      <div class="s">1.95 M tokens / 21.9 h vs 0.89 M / 5.9 h</div></div>
+    <div class="metric"><div class="v">71.2<i>%</i></div><div class="k">strict accuracy, best cell</div><div class="s">study 01 · Qwen3.8-27B + own harness</div></div>
+    <div class="metric warn"><div class="v">47<i>%</i></div><div class="k">worst-case decision spread</div><div class="s">study 02 · same applicant, 100 runs</div></div>
+    <div class="metric good"><div class="v">0<i>%</i></div><div class="k">deterministic-path variance</div><div class="s">600 rule-matched runs · identical output</div></div>
+    <div class="metric bad"><div class="v">−30<i>pts</i></div><div class="k">tuning → held-out optimism gap</div><div class="s">both models · why tuning scores bite</div></div>
+    <div class="metric"><div class="v">3.4<i>×</i></div><div class="k">cost spread on one exam</div><div class="s">1.95 M tok / 21.9 h vs 0.89 M / 5.9 h</div></div>
+    <div class="metric warn"><div class="v">−0.9<i>pts</i></div><div class="k">cost of re-using a harness</div><div class="s">tuned harnesses do not transfer</div></div>
   </div>
 </div></section>
 
 <section class="band"><div class="wrap">
-  <p class="eyebrow">The argument</p>
-  <h2 style="margin-top:0">Four questions a convincing demo cannot answer</h2>
-  <p class="lede">These are the questions an experience-study workflow has to survive before anyone signs it
-  off. One demo answers none of them, which is why the first thing I built was an exam rather than an
-  application.</p>
-  <div class="q" style="margin-top:2rem">
-    <div><span>Q1 · SUBJECT</span><b>How good is the model at the task?</b><p>How much of what is really in the data does it find, scored strictly enough that a vague answer scores nothing.</p></div>
-    <div><span>Q2 · ERRORS</span><b>What does it miss, and what does it invent?</b><p>A miss and an invention cost different things and are fixed differently, so they cannot be averaged into one score.</p></div>
-    <div><span>Q3 · COST</span><b>What does one answer cost?</b><p>Tokens and wall time, printed in the same row as the result they bought — because it changes the ranking.</p></div>
-    <div><span>Q4 · PIPELINE</span><b>Is the harness still fit for purpose?</b><p>What you govern is the model and the harness together. “We upgraded the model” is not an assessment.</p></div>
+  <p class="eyebrow">The thesis</p>
+  <h2 style="margin-top:0">Three things must be true before an AI output enters an actuarial decision</h2>
+  <p class="lede">Everything I publish builds or tests one of these. Where a project is only a demonstration, I
+  say so out loud — a portfolio that cannot separate evidence from intention is worth nothing to the person who
+  has to sign.</p>
+  <div class="pillars" style="margin-top:2rem">
+    <div><span class="n">01 · MEASUREMENT</span><b>Generate the truth; never curate it</b>
+      <p>A curated answer key drifts and cannot be regenerated when the test grows. Both studies start from data
+      whose ground truth was planted by a deterministic generator, scored by a scorer that counts false alarms
+      rather than flattering the model.</p></div>
+    <div><span class="n">02 · GOVERNANCE</span><b>Every claim ships the bytes behind it</b>
+      <p>Frozen harness snapshots and prompt hashes, decisions logged in JSONL, per-pass manifests, sealed truth
+      per scenario. A number without the instrument that produced it is an anecdote.</p></div>
+    <div><span class="n">03 · ACCOUNTABILITY</span><b>Agents propose; a named human decides</b>
+      <p>Escalation thresholds, permissions and conservatism belong in the architecture, not in the prompt
+      wording. Stability is often bought with a risk-appetite decision, and somebody should sign that.</p></div>
   </div>
 </div></section>
 
-<section class="band"><div class="wrap split-32">
-  <article>
-    <p class="eyebrow">Featured research</p>
-    <h2 style="margin-top:0">Can a model read an experience study?</h2>
-    <p class="lede" style="font-size:1.05rem">Forty-seven synthetic portfolios — 250 000 policies each, four
-    benefit lines, 2015–2024 — with drifts, shocks, volatility and recovery planted into the actuals by a
-    generator that keeps the answer key sealed and leak-scanned. Two Qwen 27B models crossed with two
-    harnesses, three runs each, scored on a held-out split with false alarms counted.</p>
-    <figure class="fig">
-      <div class="chartbox" data-chart data-spec='{"kind":"lines","aria":"Published scenario sc-f69eea: Death A/E rises from 0.63 to 1.31 across 2015-2024 while CI, TPD and IP stay flat near 1.00.","x":["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024"],"y":[0.58,1.38],"ticks":[0.6,0.8,1.0,1.2],"ref":1.0,"band":{"from":"2018","to":"2024","label":"planted drift +0.15/yr"},"series":[{"cls":"s1","label":"Death 1.31","values":[0.626,0.701,0.637,0.660,0.784,0.983,1.063,1.113,1.261,1.307]},{"cls":"s3","values":[1.006,1.004,0.965,1.048,1.024,1.024,0.971,1.045,1.012,1.021]},{"cls":"s4","values":[0.986,1.041,1.025,1.029,1.010,0.963,1.013,1.007,1.018,0.985]}]}'>
-      <noscript><p class="small muted">Chart requires JavaScript: Death A/E 0.626 (2015) → 1.307 (2024); CI, TPD and IP flat within 0.96–1.05.</p></noscript>
+<section class="band"><div class="wrap">
+  <p class="eyebrow">Two studies, both measured</p>
+  <h2 style="margin-top:0">What I actually found</h2>
+  <div class="study">
+    <a href="/research/life-insurance-experience-bench.html">
+      <span class="k">Study 01 · Life insurance experience</span>
+      <h3>Can a model read an experience study?</h3>
+      <p>Forty-seven synthetic portfolios — 250 000 policies each, four benefit lines — with drifts, shocks and
+      volatility planted by a generator that keeps the answer key sealed. Two Qwen 27B models crossed with two
+      harnesses, scored strictly on a held-out split with false alarms counted, and its own failures documented
+      rather than patched.</p>
+      <div class="nums">
+        <div><b>71.2%</b><span>strict accuracy, best cell</span></div>
+        <div><b>−30pts</b><span>optimism gap</span></div>
+        <div><b>31</b><span>pure inventions by one model</span></div>
       </div>
-      <figcaption><b>What the model is fed, in one picture.</b> Death deteriorates every year from 2018 (0.660)
-      to 2024 (1.307) while the other three benefit lines do not move. The whole prompt is about
-      <b>130 numbers plus a file list</b> — roughly 2.7k tokens bare, 6.6k with the evidence pack.
-      <span class="src">data/eval/optimization/sc-f69eea/artifacts/ae_*_by_year.csv</span></figcaption>
-    </figure>
-    <p>The hard scenario in the same repo plants <strong>four findings on two lines</strong>, and three of
-    them sit inside the Poisson noise: a Death drift of +0.05/yr against ±0.045 of year-to-year variation, an
-    IP drift of +0.03/yr against ±0.026, and one 2020 shock that is the only thing a human eye catches.
-    Recovering a signal that is not visible is the job.</p>
-    <div class="btn-row">
-      <a class="btn" href="/research/life-insurance-experience-bench.html">Full write-up</a>
-      <a class="btn ghost" href="/research/findings.html">Findings ledger</a>
-      <a class="btn ghost" href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Bench">Repository</a>
+    </a>
+    <a href="/research/underwriting-output-variance.html">
+      <span class="k">Study 02 · Underwriting decisions</span>
+      <h3>The same applicant, a hundred times</h3>
+      <p>Repeated-invocation testing of a multi-agent underwriting engine: variance concentrates exactly at the
+      decision boundary, temperature changes the <em>decision</em> and not merely the spread, and a
+      most-conservative combine rule absorbed an agent's ~20 % variance down to zero across 100 of 100 runs.</p>
+      <div class="nums">
+        <div><b>0–47%</b><span>spread, clear → borderline</span></div>
+        <div><b>100/100</b><span>variance absorbed by architecture</span></div>
+        <div><b>T=0</b><span>changed the answer, not just the spread</span></div>
+      </div>
+    </a>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <p class="eyebrow">Design learnings</p>
+  <h2 style="margin-top:0">What building this taught me</h2>
+  <p class="lede">Each of these cost me a rebuild. They are listed with the repository that taught them, because
+  a lesson without a source is a slogan.</p>
+  <div class="lessons">
+    <div><span class="from">Data generator</span><b>Plant controls on the actuals only</b><p>Expected values stay on the pricing basis, so every deviation is signal you put there deliberately — and can prove.</p></div>
+    <div><span class="from">Experience Bench</span><b>Freeze the instrument before you quote it</b><p>Harness snapshots, prompt hashes, corpus manifests. Otherwise the next run compares against something that no longer exists.</p></div>
+    <div><span class="from">Experience Bench</span><b>Two failure modes, two metrics</b><p>A miss and an invention are different diseases. Blending them hid both — and the cure that helped one made the other worse.</p></div>
+    <div><span class="from">Underwriter</span><b>Rules first, model second, human last</b><p>The deterministic engine answers everything it can; the LLM only handles what rules cannot settle. That is what makes residual variance attributable.</p></div>
+    <div><span class="from">Underwriter</span><b>The combine rule is a control surface</b><p>Architecture moved variance from ~20 % to 0 % — and quietly bought conservatism with it. Name the trade, then sign it.</p></div>
+    <div><span class="from">Analysis Dashboard</span><b>The audit trail is the feature</b><p>Pipeline audit, session persistence, re-runnable steps: an answer anyone can re-derive is what makes analysis survive an audit.</p></div>
+    <div><span class="from">Standard Inquirer</span><b>Retrieval beats memory</b><p>Compliance questions must cite standards from a knowledge base, not a model's recollection of them.</p></div>
+    <div><span class="from">LLM_Status_Watch</span><b>Stdlib-only is a deployment feature</b><p>No pip, no jq, nothing to break on a Pi in a corner. A shared local model is a server with a queue — treat it like one.</p></div>
+    <div><span class="from">Craft repos</span><b>Write the question before the sweep</b><p>Pre-register, report the noise floor, and never generate a question you cannot defend.</p></div>
+  </div>
+</div></section>
+
+<section class="band"><div class="split-32">
+  <article>
+    <p class="eyebrow">The chain</p>
+    <h2 style="margin-top:0">How one thing led to the next</h2>
+    <p class="muted small">Months are the last recorded activity on each repository (read 2026-10-19). The order
+    is the actual story: each project exists because the previous one hit a wall.</p>
+    <div class="timeline">
+      <div class="t-item"><div class="when">2026 · Apr</div><h3>Fix the data plumbing first</h3>
+        <p>Schema inspection, join strategies and ERDs from a natural-language brief; natural language to a
+        reviewable list of Excel actions. Unglamorous, and the reason everything later had data to stand on.</p>
+        <div class="from">Data_Schema_analyser · Excel-AI-Automator</div></div>
+      <div class="t-item"><div class="when">2026 · May</div><h3>Do the real actuarial work, in the open</h3>
+        <p>A TPD incidence study with credibility, Mann-Kendall, GLM and tree models; conversational compliance
+        assessment against APRA standards. Both immediately wanted data nobody could publish.</p>
+        <div class="from">Experience Analysis Dashboard · Standard Inquirer</div></div>
+      <div class="t-item"><div class="when">2026 · Jun → Aug</div><h3>Build a world with a known answer</h3>
+        <p>So: a deterministic generator for Australian Death / CI / TPD / IP experience with planted controls and
+        A/E ≈ 1.0 by construction. Then a multi-agent underwriting engine on top — which instantly raised the
+        question of whether an LLM gives the same answer twice.</p>
+        <div class="from">Synthetic Data Generator · Multi-Agents Underwriter</div></div>
+      <div class="t-item"><div class="when">2026 · Aug → Oct</div><h3>Measure, or stop claiming</h3>
+        <p>The underwriter's variance studies and the A/E benchmark grew from one instinct: no claim without a
+        generated answer key, a scorer that counts false alarms, and frozen bytes behind the number.</p>
+        <div class="from">Output-variance study · Life Insurance Experience Bench</div></div>
+      <div class="t-item"><div class="when">2026 · Oct</div><h3>Operations, and the side quests that keep me honest</h3>
+        <p>A 21.9-hour exam on one shared local server makes scheduling an engineering problem. Two side projects
+        keep the habits sharp: pre-registered questions with noise floors, and generators that refuse to ask an
+        unfair question.</p>
+        <div class="from">LLM_Status_Watch · Piticle_Life · Pixel_Storybook</div></div>
     </div>
+    <div class="btn-row"><a class="btn ghost" href="/ecosystem.html">The full interlock map</a><a class="btn ghost" href="/projects.html">Every project in detail</a></div>
   </article>
   <aside>
-    <div class="tablewrap" style="margin-top:0">
-    <table class="tbl"><caption>Three findings that change practice<span>Each is argued in full on the findings page.</span></caption>
-    <tbody>
-      <tr><td><b>A harness does not transfer</b><small>Cross-loading cost 3.8 0.9 accuracy and 1.2 precision points. An apparent +8.3-point gain at 9 books decayed to −1 by 23.</small></td></tr>
-      <tr><td><b>Over-claiming ≠ mislabelling</b><small>3.8: 154 claims for 123 truths, +31 pure inventions. 3.6: 129 claims, +6 inventions. Different diseases, different cures — one of which failed experimentally.</small></td></tr>
-      <tr><td><b>Not every miss is the model</b><small>Two “failures” audited back into the data: one planted effect at half the minimum detectable slope, one genuinely ambiguous. Both documented as benchmark defects.</small></td></tr>
-    </tbody></table>
+    <div class="panel" style="margin-bottom:1rem"><h4 style="margin-top:0">Deliberately not claimed</h4>
+      <ul class="notclaimed">
+        <li><i>✕</i> no production system of any insurer is described here</li>
+        <li><i>✕</i> no real policyholder or portfolio data — all synthetic</li>
+        <li><i>✕</i> no claim that a model replaces actuarial judgement</li>
+        <li><i>✕</i> no accuracy claim for the underwriting engine — it measures consistency</li>
+        <li><i>✕</i> no analytics, cookies or trackers on this site</li>
+      </ul>
+    </div>
+    <div class="panel"><h4 style="margin-top:0">Currently building</h4>
+      <ul class="building">
+        <li>A fresh held-out exam — the current split is spent</li>
+        <li>A real jail for tool calls (the current sandbox is advisory)</li>
+        <li>Scoring the dashboard and underwriter to benchmark standard</li>
+        <li>Lapse and expense A/E as new scenario families</li>
+      </ul>
     </div>
   </aside>
-</div></section>
-
-<section class="band"><div class="wrap">
-  <p class="eyebrow">The ecosystem</p>
-  <h2 style="margin-top:0">Six layers, and the edges are named in code</h2>
-  <p class="lede">A generator so that “correct” means something. A benchmark so that progress means something.
-  Then judgement, governance, operations and craft on top of them — each one feeding the next.</p>
-  <div class="eco" style="margin-top:2rem">
-    <div class="eco-layer"><div class="lab"><div class="lv">L4 · L3</div><h3>Governance &amp; judgement</h3><p>Where output has to survive an auditor.</p></div>
-      <div class="eco-nodes">
-        <a class="node" href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter"><b>Multi-Agents Underwriter</b><span>agent debate · deterministic rules · JSONL audit trail</span></a>
-        <a class="node" href="https://github.com/jasonzheshiou/Standard_Inquirer"><b>Standard Inquirer</b><span>40+ APRA standards · conversational assessment</span></a>
-        <a class="node" href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Analysis_Dashboard"><b>Experience Analysis Dashboard</b><span>credibility · Mann-Kendall · GLM · MOB</span></a>
-      </div></div>
-    <div class="eco-layer"><div class="lab"><div class="lv">L2</div><h3>Measurement</h3><p>The layer everything is checked against.</p></div>
-      <div class="eco-nodes">
-        <a class="node" href="/research/life-insurance-experience-bench.html"><b>Life Insurance Experience Bench</b><span>47 scenarios · strict scorer · frozen harness bytes</span></a>
-      </div></div>
-    <div class="eco-layer"><div class="lab"><div class="lv">L1</div><h3>Data</h3><p>A deterministic world with a known answer key.</p></div>
-      <div class="eco-nodes">
-        <a class="node" href="https://github.com/jasonzheshiou/Synthetic_Life_Insurance_Data_Generator"><b>Synthetic Data Generator</b><span>Death / CI / TPD / IP · seed 42 · planted controls</span></a>
-      </div></div>
-    <div class="eco-layer"><div class="lab"><div class="lv">L5 · L6</div><h3>Operations &amp; craft</h3><p>Watch the server; keep the habits honest.</p></div>
-      <div class="eco-nodes">
-        <a class="node" href="https://github.com/jasonzheshiou/LLM_Status_Watch"><b>LLM_Status_Watch</b><span>Prometheus → ntfy, on a Pi</span></a>
-        <a class="node" href="https://github.com/jasonzheshiou/Piticle_Life"><b>Piticle_Life</b><span>pre-registered questions, honest noise floors</span></a>
-        <a class="node" href="/projects.html"><b>…and 6 more</b><span>all 13 repositories</span></a>
-      </div></div>
-  </div>
-  <div class="dens">
-    <span class="chip">Generator → Bench: imported as a library, pinned <span class="num">66a73d0</span></span>
-    <span class="chip">Bench → everything: re-measure the model-harness pair</span>
-    <span class="chip">Dashboard → Underwriter: experience evidence into rules</span>
-  </div>
-  <div class="btn-row"><a class="btn ghost" href="/ecosystem.html">The full interlock map</a></div>
 </div></section>
 
 <section class="band"><div class="wrap">
   <p class="eyebrow">Selected work</p>
-  <h2 style="margin-top:0">What each repository is for</h2>
+  <h2 style="margin-top:0">Six of thirteen</h2>
   <div class="cards" style="margin-top:1.5rem">
-    <a class="card" href="/research/life-insurance-experience-bench.html"><span class="id">L2 · Measurement</span><h3>Experience Bench</h3><p>The exam, the scorer, the corpora. Where the numbers come from.</p><div class="row"><span class="tag">Python</span><span class="chip teal">measured</span></div></a>
-    <a class="card" href="https://github.com/jasonzheshiou/Synthetic_Life_Insurance_Data_Generator"><span class="id">L1 · Data</span><h3>Synthetic Data Generator</h3><p>Deterministic Australian life-insurance experience with A/E built in.</p><div class="row"><span class="tag">Python</span><span class="tag">Streamlit</span></div></a>
-    <a class="card" href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter"><span class="id">L4 · Governance</span><h3>Multi-Agents Underwriter</h3><p>Three specialist agents, structured debate, humans deciding.</p><div class="row"><span class="tag">Python</span><span class="chip teal">0–47 % variance measured</span></div></a>
-    <a class="card" href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Analysis_Dashboard"><span class="id">L3 · Judgement</span><h3>Experience Analysis Dashboard</h3><p>TPD incidence study with audit-ready reporting and a modular pipeline.</p><div class="row"><span class="tag">Streamlit</span><span class="tag">scikit-learn</span></div></a>
-    <a class="card" href="https://github.com/jasonzheshiou/Standard_Inquirer"><span class="id">L4 · Governance</span><h3>Standard Inquirer</h3><p>Compliance self-assessment against APRA standards, from a local knowledge base.</p><div class="row"><span class="tag">Python</span><span class="tag">ChromaDB</span></div></a>
-    <a class="card" href="https://github.com/jasonzheshiou/LLM_Status_Watch"><span class="id">L5 · Operations</span><h3>LLM_Status_Watch</h3><p>Know the second the shared model server frees up. Stdlib only.</p><div class="row"><span class="tag">Python</span><span class="chip teal">in service</span></div></a>
+    <a class="card" href="/research/life-insurance-experience-bench.html"><span class="id">Study 01 · Measurement</span><h3>Experience Bench</h3><p>The exam, the scorer, the corpora. Where the accuracy and cost numbers come from.</p><div class="row"><span class="tag">Python</span><span class="chip teal">measured</span></div></a>
+    <a class="card" href="https://github.com/jasonzheshiou/Multi-Agents_Underwriter"><span class="id">Study 02 · Governance</span><h3>Multi-Agents Underwriter</h3><p>Three specialist agents, structured debate, deterministic rules underneath, a human signing on top.</p><div class="row"><span class="tag">Python</span><span class="chip teal">variance measured</span></div></a>
+    <a class="card" href="https://github.com/jasonzheshiou/Synthetic_Life_Insurance_Data_Generator"><span class="id">L1 · Data</span><h3>Synthetic Data Generator</h3><p>Deterministic Australian life-insurance experience, A/E built in, controls you plant on purpose.</p><div class="row"><span class="tag">Python</span><span class="tag">Streamlit</span></div></a>
+    <a class="card" href="https://github.com/jasonzheshiou/Life_Insurance_Experience_Analysis_Dashboard"><span class="id">L3 · Judgement</span><h3>Experience Analysis Dashboard</h3><p>TPD incidence study with credibility, trend tests and model selection, built to be audit-ready.</p><div class="row"><span class="tag">Streamlit</span><span class="tag">scikit-learn</span></div></a>
+    <a class="card" href="https://github.com/jasonzheshiou/Standard_Inquirer"><span class="id">L4 · Governance</span><h3>Standard Inquirer</h3><p>Compliance self-assessment against 40+ APRA standards, retrieved from a local knowledge base.</p><div class="row"><span class="tag">Python</span><span class="tag">ChromaDB</span></div></a>
+    <a class="card" href="https://github.com/jasonzheshiou/LLM_Status_Watch"><span class="id">L5 · Operations</span><h3>LLM_Status_Watch</h3><p>Know the moment the shared model server frees up. Prometheus in, phone ping out, stdlib only.</p><div class="row"><span class="tag">Python</span><span class="chip teal">in service</span></div></a>
   </div>
-  <div class="btn-row"><a class="btn ghost" href="/projects.html">All 13 repositories</a></div>
+  <div class="btn-row"><a class="btn ghost" href="/projects.html">All 13 repositories</a><a class="btn ghost" href="/research/findings.html">Findings ledger</a></div>
 </div></section>
 
 <section class="band"><div class="wrap split">
   <article>
-    <p class="eyebrow">About</p>
-    <h2 style="margin-top:0">Jason Ou <span class="num" style="font-size:.6em;color:var(--muted)">FIAA</span></h2>
-    <p>Senior data scientist and strategic analytic actuary in Sydney, thirteen years in life insurance and
-    financial services: predictive underwriting in production at Pacific Life Re, before that Resolution Life
-    and Zurich. Fellow of the Institute of Actuaries of Australia since 2021.</p>
-    <p>The open work sits at that intersection: actuarial judgement on one side, model governance on the other,
-    and a stubborn insistence that neither of them survives an un-inspectable tool.</p>
+    <p class="eyebrow">Say hello</p>
+    <h2 style="margin-top:0">Corrections, collaborations, hard questions</h2>
+    <p class="muted">The most useful thing you can send me is a reason why one of these results does not hold.
+    The decision records live in the repositories' logs, so a disagreement can be argued against evidence rather
+    than against a summary of it. I am glad to talk with actuaries, engineers and regulators about the governance
+    patterns — and I read everything.</p>
     <div class="btn-row">
-      <a class="btn ghost" href="/about.html">More about the practice</a>
-      <a class="btn ghost" href="mailto:ouzheshi@gmail.com">ouzheshi@gmail.com</a>
+      <a class="btn" href="mailto:ouzheshi@gmail.com">ouzheshi@gmail.com</a>
+      <a class="btn ghost" href="https://github.com/jasonzheshiou">GitHub</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/zheshi-jason-ou-8780203a">LinkedIn</a>
     </div>
   </article>
-  <aside>
-    <div class="tablewrap" style="margin-top:0"><table class="tbl"><caption>What is deliberately left unstated<span>The credibility of a site like this depends on it.</span></caption><tbody>
-      <tr><td><small class="muted">no</small> production system of any insurer is described here</td></tr>
-      <tr><td><small class="muted">no</small> real policyholder or portfolio data — every scenario is synthetic</td></tr>
-      <tr><td><small class="muted">no</small> claim that a model replaces actuarial judgement</td></tr>
-      <tr><td><small class="muted">no</small> analytics, cookies or third-party trackers on this site</td></tr>
-    </tbody></table></div>
-  </aside>
+  <aside><div class="panel">
+    <h4 style="margin-top:0">Where I am, professionally</h4>
+    <dl class="spec">
+      <dt>Now</dt><dd>Pacific Life Re — predictive underwriting in production</dd>
+      <dt>Before</dt><dd>Resolution Life Australasia · Zurich</dd>
+      <dt>Credential</dt><dd>FIAA, Actuaries Institute, 2021</dd>
+      <dt>Stack</dt><dd>Python · SQL · pandas · Streamlit · Power BI</dd>
+      <dt>Reading</dt><dd>model-risk practice notes and experience studies</dd>
+    </dl>
+  </div></aside>
 </div></section>
 
 </main>
 
 <footer class="site"><div class="wrap cols">
   <div><h4>About this site</h4>
-    <p class="small muted">Jason Ou — FIAA, senior data scientist and analytic actuary. Open-source
-    life-insurance data tools, benchmarks and governance patterns for actuarial work with AI.</p></div>
+    <p class="small muted">Jason Ou — FIAA, senior data scientist and analytic actuary in Sydney. Open-source
+    life-insurance data tools, two measured studies of LLMs in actuarial work, and the governance patterns that
+    fall out of both.</p></div>
   <div><h4>Research</h4><ul>
     <li><a href="/research/life-insurance-experience-bench.html">The A/E benchmark</a></li>
+    <li><a href="/research/underwriting-output-variance.html">Output-variance study</a></li>
     <li><a href="/research/findings.html">Findings ledger</a></li>
     <li><a href="/ecosystem.html">Ecosystem map</a></li></ul></div>
   <div><h4>Elsewhere</h4><ul>
