@@ -166,6 +166,38 @@ than being a pile of apps:</p>
 <tr><td>L6 Craft</td><td>measured where pre-registered</td><td>nothing — these are deliberate side projects</td></tr>
 </tbody></table></div>
 
+<h2 id="chain">How one thing led to the next</h2>
+<p>Months are the last recorded activity on each repository (read 2026-10-19). The order is the actual story: each
+project exists because the previous one hit a wall, which is what makes "ecosystem" more than a shared tag.</p>
+<div class="timeline">
+      <div class="t-item"><div class="when">2026 · Apr</div><h3>Fix the data plumbing first</h3>
+        <p>Schema inspection, join strategies and ERDs from a natural-language brief; natural language to a
+        reviewable list of Excel actions. Unglamorous, and the reason everything later had data to stand on.</p>
+        <div class="from">Data_Schema_analyser · Excel-AI-Automator</div></div>
+      <div class="t-item"><div class="when">2026 · May</div><h3>Do the real actuarial work, in the open</h3>
+        <p>A TPD incidence study with credibility, Mann-Kendall, GLM and tree models; conversational compliance
+        assessment against APRA standards. Both immediately wanted data nobody could publish.</p>
+        <div class="from">Experience Analysis Dashboard · Standard Inquirer</div></div>
+      <div class="t-item"><div class="when">2026 · Jun → Aug</div><h3>Build a world with a known answer</h3>
+        <p>So: a deterministic generator for Australian Death / CI / TPD / IP experience with planted controls and
+        A/E ≈ 1.0 by construction. Then a multi-agent underwriting engine on top — which instantly raised the
+        question of whether an LLM gives the same answer twice.</p>
+        <div class="from">Synthetic Data Generator · Multi-Agents Underwriter</div></div>
+      <div class="t-item"><div class="when">2026 · Aug → Oct</div><h3>Measure, or stop claiming</h3>
+        <p>The underwriter's variance studies and the A/E benchmark grew from one instinct: no claim without a
+        generated answer key, a scorer that counts false alarms, and frozen bytes behind the number.</p>
+        <div class="from">Output-variance study · Life Insurance Experience Bench</div></div>
+      <div class="t-item"><div class="when">2026 · Oct</div><h3>Operations, and the side quests that keep me honest</h3>
+        <p>A 21.9-hour exam on one shared local server makes scheduling an engineering problem. Two side projects
+        keep the habits sharp: pre-registered questions with noise floors, and generators that refuse to ask an
+        unfair question.</p>
+        <div class="from">LLM_Status_Watch · Piticle_Life · Pixel_Storybook</div></div>
+    </div>
+    
+<p class="small muted">The same order in checklist form, with the design lessons each step taught, is on the
+<a href="/projects.html">projects page</a>; the development method they were built with is on the
+<a href="/method.html">method page</a>.</p>
+
 <h2 id="open">Why open</h2>
 <p>Underwriting rules engines are the operational backbone of insurance: they encode what risks are
 acceptable, on what terms, at what price. Building them is hard; explaining them to auditors, regulators and
@@ -186,6 +218,7 @@ argued against evidence rather than against a summary. Open an issue on the rele
 <a href="#edges">The interlock, edge by edge</a><br>
 <a href="#rule">The rule that binds them</a><br>
 <a href="#maturity">What each layer can support</a><br>
+<a href="#chain">How one thing led to the next</a><br>
 <a href="#open">Why open</a><br>
 <h4>Read next</h4>
 <a href="/research/life-insurance-experience-bench.html">The benchmark findings</a><br>
